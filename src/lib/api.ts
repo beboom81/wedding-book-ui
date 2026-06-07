@@ -75,9 +75,9 @@ export const request = (method: string, path: string) => {
       const json = await res.json();
       if (json.error) {
         const msg = json.error[0];
-        const isServer = res.status >= HTTP_STATUS_INTERNAL_SERVER_ERROR;
-        const text = isServer ? `ID: ${json.id}\n🟥 ${msg}` : `🟨 ${msg}`;
-        window.alert(text);
+        if (res.status >= HTTP_STATUS_INTERNAL_SERVER_ERROR) {
+          window.alert(`ID: ${json.id}\n🟥 ${msg}`);
+        }
         throw new Error(msg);
       }
 
