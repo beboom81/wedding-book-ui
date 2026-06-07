@@ -12,7 +12,7 @@ export const config = {
   guestKey: (env.VITE_GUEST_KEY as string) || '',
 
   /** Countdown target. */
-  weddingTime: (env.VITE_WEDDING_TIME as string) || '2024-01-01 09:30:00',
+  weddingTime: (env.VITE_WEDDING_TIME as string) || '2026-10-13 18:00:00',
 
   /** Background music url ("" disables). */
   audio: (env.VITE_AUDIO as string) ?? '/assets/music/pure-love-304010.mp3',

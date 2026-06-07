@@ -72,7 +72,7 @@ export default function CommentForm({ variant }: Props) {
         <>
           <div className="mb-3">
             <label htmlFor="form-name" className="form-label my-1">
-              <i className="fa-solid fa-person me-2"></i>Nama
+              <i className="fa-solid fa-person me-2"></i>Tên
             </label>
             <input
               dir="auto"
@@ -81,7 +81,7 @@ export default function CommentForm({ variant }: Props) {
               id="form-name"
               minLength={2}
               maxLength={50}
-              placeholder="Isikan Nama Anda"
+              placeholder="Nguyễn Văn A"
               autoComplete="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -90,7 +90,7 @@ export default function CommentForm({ variant }: Props) {
 
           <div className="mb-3">
             <label htmlFor="form-presence" className="form-label my-1">
-              <i className="fa-solid fa-person-circle-question me-2"></i>Presensi
+              <i className="fa-solid fa-person-circle-question me-2"></i>Tham dự
             </label>
             <select
               className="form-select shadow-sm rounded-4"
@@ -98,9 +98,9 @@ export default function CommentForm({ variant }: Props) {
               value={presence}
               onChange={(e) => setPresence(e.target.value)}
             >
-              <option value="0">Konfirmasi Presensi</option>
-              <option value="1">&#9989; Datang</option>
-              <option value="2">&#10060; Berhalangan</option>
+              <option value="0">Xác nhận tham dự</option>
+              <option value="1">&#9989; Có á</option>
+              <option value="2">&#10060; Bận mất rồi</option>
             </select>
           </div>
         </>
@@ -110,7 +110,7 @@ export default function CommentForm({ variant }: Props) {
         <div className="d-block mb-3">
           <label htmlFor="form-comment" className="form-label my-1">
             <i className="fa-solid fa-comment me-2"></i>
-            {isGuest ? 'Ucapan & Doa' : 'Comment'}
+            {isGuest ? 'Comment' : 'Comment'}
           </label>
           <div className="position-relative">
             {tenorKey && (
@@ -130,7 +130,7 @@ export default function CommentForm({ variant }: Props) {
               rows={isGuest ? 4 : 3}
               minLength={1}
               maxLength={1000}
-              placeholder={isGuest ? 'Tulis Ucapan dan Doa' : 'Type to comment'}
+              placeholder={isGuest ? 'Lời chúc..' : 'Type to comment'}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />

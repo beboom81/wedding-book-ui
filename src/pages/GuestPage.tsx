@@ -15,8 +15,18 @@ import CopyButton from '../components/guest/CopyButton';
 const LOVE_PATH =
   'm8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15';
 
+const COUPLE = 'Duy Khanh & Ý Duyên';
+const PLACE_DATE = 'Hồ Chí Minh, 13 October 2026';
+
 const gallery1 = [1, 2, 3];
 const gallery2 = [4, 5, 6];
+
+const loveStory: [string, string][] = [
+  ['✨ Lần gặp đầu tiên', 'Nơi bắt đầu câu chuyện của chúng mình.'],
+  ['💞 Hẹn hò', 'Những ngày tháng cùng nhau tạo nên kỷ niệm.'],
+  ['💥 Những lần cãi nhau', 'Cãi nhau rồi lại thương nhau nhiều hơn.'],
+  ['💍 Cầu hôn', 'Và rồi chúng mình quyết định về chung một nhà.'],
+];
 
 function getQueryParam(name: string): string | null {
   const href = window.location.href;
@@ -44,7 +54,6 @@ export default function GuestPage() {
     AOS.init({ once: true, duration: 1000 });
   }, []);
 
-  // Fetch the public invitation config (timezone, gif key, permissions).
   useEffect(() => {
     if (!commentsEnabled) {
       return;
@@ -60,9 +69,7 @@ export default function GuestPage() {
     setOpened(true);
     document.body.scrollIntoView({ behavior: 'instant' });
     setTimeout(() => AOS.refreshHard(), 100);
-
     confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
-
     if (config.audio && audioRef.current) {
       audioRef.current.play().then(() => setMusicPlaying(true)).catch(() => undefined);
     }
@@ -113,10 +120,10 @@ export default function GuestPage() {
           <div className="position-relative bg-white-black d-flex justify-content-center align-items-center vh-100">
             <div className="text-center p-4 bg-overlay-auto rounded-5">
               <h2 className="font-esthetic mb-4" style={{ fontSize: '2rem' }}>
-                Wahyu &amp; Riski
+                {COUPLE}
               </h2>
               <p className="m-0" style={{ fontSize: '1rem' }}>
-                Rabu, 15 Maret 2023
+                {PLACE_DATE}
               </p>
             </div>
           </div>
@@ -134,7 +141,7 @@ export default function GuestPage() {
               />
               <div className="position-relative text-center bg-overlay-auto" style={{ backgroundColor: 'unset' }}>
                 <h1 className="font-esthetic pt-5 pb-4 fw-medium" style={{ fontSize: '2.25rem' }}>
-                  Undangan Pernikahan
+                  Wedding invitation
                 </h1>
                 <img
                   src={asset('/assets/images/bg.webp')}
@@ -143,10 +150,10 @@ export default function GuestPage() {
                   className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
                 />
                 <h2 className="font-esthetic my-4" style={{ fontSize: '2.25rem' }}>
-                  Wahyu &amp; Riski
+                  {COUPLE}
                 </h2>
                 <p className="my-2" style={{ fontSize: '1.25rem' }}>
-                  Rabu, 15 Maret 2023
+                  {PLACE_DATE}
                 </p>
                 <div className="d-flex justify-content-center align-items-center mt-4 mb-2">
                   <div className="mouse-animation border border-secondary border-2 rounded-5 px-2 py-1 opacity-50">
@@ -163,15 +170,16 @@ export default function GuestPage() {
 
             {/* Bride */}
             <section className="bg-white-black text-center" id="bride">
-              <h2 className="font-arabic py-4 m-0" style={{ fontSize: '2rem' }}>
-                بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+              <h2 className="font-greatvibes py-4 m-0" style={{ fontSize: '2rem' }}>
+                Lễ Thành Hôn
               </h2>
               <h2 className="font-esthetic py-4 m-0" style={{ fontSize: '2rem' }}>
-                Assalamualaikum Warahmatullahi Wabarakatuh
+                Match made in heaven
               </h2>
               <p className="pb-4 px-2 m-0" style={{ fontSize: '0.95rem' }}>
-                Tanpa mengurangi rasa hormat, kami mengundang Anda untuk berkenan menghadiri acara pernikahan
-                kami:
+                Sau hành trình dài cùng nhau viết nên câu chuyện tình yêu,
+                chúng tôi quyết định bước sang chương mới - chương
+                mang tên Hôn Nhân.
               </p>
 
               <div className="overflow-x-hidden pb-4">
@@ -184,20 +192,20 @@ export default function GuestPage() {
                       onClick={(e) => setModalSrc(e.currentTarget.src)}
                       className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
                     />
-                    <h2 className="font-esthetic m-0" style={{ fontSize: '2.125rem' }}>
-                      Nama Wahyu Siapa
+                    <h2 className="font-greatvibes m-0" style={{ fontSize: '2.125rem' }}>
+                      Đinh Duy Khanh
                     </h2>
                     <p className="mt-3 mb-1" style={{ fontSize: '1.25rem' }}>
-                      Putra ke-1
+                      Quý nam
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      Bapak lorem ipsum
+                      Cha Đinh Văn Lê
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      dan
+                      &
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      Ibu lorem ipsum
+                      Mẹ Nguyễn Kiều Diễm Phương
                     </p>
                   </div>
                   <Love top="90%" left="5%" />
@@ -216,20 +224,20 @@ export default function GuestPage() {
                       onClick={(e) => setModalSrc(e.currentTarget.src)}
                       className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
                     />
-                    <h2 className="font-esthetic m-0" style={{ fontSize: '2.125rem' }}>
-                      Nama Riski Siapa
+                    <h2 className="font-greatvibes m-0" style={{ fontSize: '2.125rem' }}>
+                      Phạm Nguyễn Ý Duyên
                     </h2>
                     <p className="mt-3 mb-1" style={{ fontSize: '1.25rem' }}>
-                      Putri ke-2
+                      Trưởng nữ
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      Bapak lorem ipsum
+                      Cha Phạm Văn A
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      dan
+                      &
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      Ibu lorem ipsum
+                      Mẹ Nguyễn Thị Nguyệt
                     </p>
                   </div>
                   <Love top="90%" left="5%" />
@@ -239,26 +247,21 @@ export default function GuestPage() {
 
             <Wave d="M0,192L40,181.3C80,171,160,149,240,149.3C320,149,400,171,480,165.3C560,160,640,128,720,128C800,128,880,160,960,186.7C1040,213,1120,235,1200,218.7C1280,203,1360,149,1400,122.7L1440,96L1440,0L0,0Z" />
 
-            {/* Quotes */}
+            {/* Love Idiom */}
             <section className="bg-light-dark pt-2 pb-4">
               <div className="container text-center">
                 <h2 className="font-esthetic pt-2 pb-1 m-0" style={{ fontSize: '2rem' }}>
-                  Allah Subhanahu Wa Ta'ala berfirman
+                  Love Idiom
                 </h2>
                 <div className="bg-theme-auto mt-4 p-3 shadow rounded-4" data-aos="fade-down" data-aos-duration="2000">
                   <p className="p-1 mb-2" style={{ fontSize: '0.95rem' }}>
-                    Dan segala sesuatu Kami ciptakan berpasang-pasangan agar kamu mengingat (kebesaran Allah).
-                  </p>
-                  <p className="m-0 p-0 text-theme-auto" style={{ fontSize: '0.95rem' }}>
-                    QS. Adh-Dhariyat: 49
+                    Hai trái tim chung một nhịp, hai cuộc đời chung một lối
                   </p>
                 </div>
                 <div className="bg-theme-auto mt-4 p-3 shadow rounded-4" data-aos="fade-down" data-aos-duration="2000">
                   <p className="p-1 mb-2" style={{ fontSize: '0.95rem' }}>
-                    dan sesungguhnya Dialah yang menciptakan pasangan laki-laki dan perempuan,
-                  </p>
-                  <p className="m-0 p-0 text-theme-auto" style={{ fontSize: '0.95rem' }}>
-                    QS. An-Najm: 45
+                    Duyên do trời định, phận do người tạo – hạnh phúc
+                    do đôi ta nắm giữ
                   </p>
                 </div>
               </div>
@@ -269,7 +272,7 @@ export default function GuestPage() {
               <div className="container">
                 <div className="bg-theme-auto rounded-5 shadow p-3">
                   <h2 className="font-esthetic text-center py-2 mb-2" style={{ fontSize: '2.125rem' }}>
-                    Kisah Cinta
+                    Love Story
                   </h2>
                   <div className="position-relative">
                     {!showStory && (
@@ -281,7 +284,7 @@ export default function GuestPage() {
                           className="btn btn-outline-auto btn-sm rounded-4 shadow-sm"
                           onClick={() => setShowStory(true)}
                         >
-                          <i className="fa-solid fa-heart fa-bounce me-2"></i>Lihat Story
+                          <i className="fa-solid fa-heart fa-bounce me-2"></i>Lắng nghe câu chuyện
                         </button>
                       </div>
                     )}
@@ -289,11 +292,7 @@ export default function GuestPage() {
                       className="overflow-y-scroll overflow-x-hidden p-2 with-scrollbar"
                       style={{ height: '15rem', filter: showStory ? 'none' : 'blur(5px)' }}
                     >
-                      {[
-                        ['💼 Awal Pertemuan Sederhana', 'Pada Januari 2025, Wahyu, seorang desainer grafis berusia 28 tahun, bertemu Riski, copywriter yang dikenal cerdas dan pendiam, dalam proyek branding perusahaan.'],
-                        ['💞 Benih Cinta dalam Ujian', 'Memasuki Februari 2025, proyek mereka menghadapi krisis. Di tengah tekanan, Riski tampil dengan solusi kreatif yang menyelamatkan proyek, membuat Wahyu terkesan.'],
-                        ['💍 Langkah Menuju Ridha Allah', 'Pada Maret 2025, setelah istikharah dan mendapat restu keluarga, Wahyu melamar Riski dalam acara sederhana namun penuh makna.'],
-                      ].map(([t, body], i) => (
+                      {loveStory.map(([t, body], i) => (
                         <div className="row" key={i}>
                           <div className="col-auto position-relative">
                             <p
@@ -322,15 +321,15 @@ export default function GuestPage() {
             <section className="bg-white-black pb-2" id="wedding-date">
               <div className="container text-center">
                 <h2 className="font-esthetic py-4 m-0" style={{ fontSize: '2.25rem' }}>
-                  Moment Bahagia
+                  Happy moments
                 </h2>
                 <div className="border rounded-pill shadow py-2 px-4 mt-2 mb-4">
                   <div className="row justify-content-center">
                     {[
-                      ['Hari', time.day],
-                      ['Jam', time.hour],
-                      ['Menit', time.minute],
-                      ['Detik', time.second],
+                      ['Ngày', time.day],
+                      ['Giờ', time.hour],
+                      ['Phút', time.minute],
+                      ['Giây', time.second],
                     ].map(([label, val]) => (
                       <div className="col-3 p-1" key={label}>
                         <p className="d-inline m-0 p-0" style={{ fontSize: '1.25rem' }}>
@@ -342,34 +341,55 @@ export default function GuestPage() {
                   </div>
                 </div>
                 <p className="py-2 m-0" style={{ fontSize: '0.95rem' }}>
-                  Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, insyaAllah kami akan
-                  menyelenggarakan acara:
+                  Trân trọng kính mời quý vị đến dự lễ thành
+                  hôn của chúng tôi tại:
                 </p>
                 <div className="overflow-x-hidden">
                   <div className="py-2" data-aos="fade-right" data-aos-duration="1500">
-                    <h2 className="font-esthetic m-0 py-2" style={{ fontSize: '2rem' }}>
-                      Akad
+                    <h2 className="font-esthetic m-0 py-2" style={{ fontSize: '3rem' }}>
+                      Adora Dynasty
                     </h2>
-                    <p style={{ fontSize: '0.95rem' }}>Pukul 10.00 WIB - Selesai</p>
                   </div>
                   <div className="py-2" data-aos="fade-left" data-aos-duration="1500">
-                    <h2 className="font-esthetic m-0 py-2" style={{ fontSize: '2rem' }}>
-                      Resepsi
+                    <h2 className="font-dancingscript m-0 py-2" style={{ fontSize: '2rem' }}>
+                      Vào lúc 18:00 Chủ nhật, 13.10.2026
                     </h2>
-                    <p style={{ fontSize: '0.95rem' }}>Pukul 13.00 WIB - Selesai</p>
+                  </div>
+                </div>
+                <p className="py-2 m-0" style={{ fontSize: '0.95rem' }}>
+                  Mong quý khách ưu tiên trang phục cùng tông màu để
+                  hòa hợp không gian buổi tiệc:
+                </p>
+                <div className="py-2" data-aos="fade-down" data-aos-duration="1500">
+                  <div className="d-flex justify-content-center align-items-center mb-3">
+                    {['white', 'rgb(38, 132, 255)', 'rgb(0, 0, 0)', 'rgb(82, 79, 79)', 'rgb(255, 0, 0)'].map(
+                      (color, i) => (
+                        <div
+                          key={color}
+                          className="shadow rounded-circle border border-secondary"
+                          style={{
+                            width: '3rem',
+                            height: '3rem',
+                            backgroundColor: color,
+                            marginLeft: i === 0 ? undefined : '-1rem',
+                          }}
+                        ></div>
+                      ),
+                    )}
                   </div>
                 </div>
                 <div className="py-2" data-aos="fade-down" data-aos-duration="1500">
                   <a
-                    href="https://goo.gl/maps/ALZR6FJZU3kxVwN86"
+                    href="https://maps.app.goo.gl/2Bq7qVTxbJdif2rJ7"
                     target="_blank"
                     rel="noreferrer"
                     className="btn btn-outline-auto btn-sm rounded-pill shadow mb-2 px-3"
                   >
-                    <i className="fa-solid fa-map-location-dot me-2"></i>Lihat Google Maps
+                    <i className="fa-solid fa-map-location-dot me-2"></i>See Google Maps
                   </a>
                   <small className="d-block my-1">
-                    RT 10 RW 02, Desa Pajerukan, Kec. Kalibagor, Kab. Banyumas, Jawa Tengah 53191.
+                    1A Tôn Thất Tùng, Phường Phạm Ngũ Lão, Quận 1,
+                    Thành phố Hồ Chí Minh, Việt Nam.
                   </small>
                 </div>
               </div>
@@ -380,7 +400,7 @@ export default function GuestPage() {
               <div className="container">
                 <div className="border rounded-5 shadow p-3">
                   <h2 className="font-esthetic text-center py-2 m-0" style={{ fontSize: '2.25rem' }}>
-                    Galeri
+                    Gallery
                   </h2>
                   {[gallery1, gallery2].map((set, idx) => (
                     <Carousel key={idx} className="mt-4" data-aos="fade-up" data-aos-duration="1500">
@@ -409,15 +429,16 @@ export default function GuestPage() {
                   Love Gift
                 </h2>
                 <p className="mb-1" style={{ fontSize: '0.95rem' }}>
-                  Dengan hormat, bagi Anda yang ingin memberikan tanda kasih kepada kami, dapat melalui:
+                  Với tất cả sự trân trọng, nếu quý khách muốn
+                  gửi tặng chúng tôi chút tấm lòng, xin vui lòng thông qua:
                 </p>
 
                 <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start" data-aos="fade-up" data-aos-duration="2500">
                   <i className="fa-solid fa-money-bill-transfer"></i>
-                  <p className="d-inline"> Transfer</p>
+                  <p className="d-inline"> Transfer/Chuyển khoản</p>
                   <div className="d-flex justify-content-between align-items-center mt-2">
                     <p className="m-0 p-0" style={{ fontSize: '0.95rem' }}>
-                      <i className="fa-regular fa-user fa-sm me-1"></i>Riski Siapa?
+                      <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
                     </p>
                     <button
                       className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
@@ -431,13 +452,13 @@ export default function GuestPage() {
                     <div>
                       <hr className="my-2 py-1" />
                       <p className="m-0" style={{ fontSize: '0.9rem' }}>
-                        <i className="fa-solid fa-building-columns me-1"></i>Bank Central Asia
+                        <i className="fa-solid fa-building-columns me-1"></i>TP Bank
                       </p>
                       <div className="d-flex justify-content-between align-items-center mt-2">
                         <p className="m-0 p-0" style={{ fontSize: '0.85rem' }}>
-                          <i className="fa-solid fa-credit-card me-1"></i>1234567891234
+                          <i className="fa-solid fa-credit-card me-1"></i>0775493481
                         </p>
-                        <CopyButton value="1234567891234" />
+                        <CopyButton value="0775493481" />
                       </div>
                     </div>
                   </Collapse>
@@ -445,10 +466,10 @@ export default function GuestPage() {
 
                 <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start" data-aos="fade-up" data-aos-duration="2500">
                   <i className="fa-solid fa-qrcode fa-lg"></i>
-                  <p className="d-inline"> Qris</p>
+                  <p className="d-inline"> QR</p>
                   <div className="d-flex justify-content-between align-items-center mt-2">
                     <p className="m-0 p-0" style={{ fontSize: '0.95rem' }}>
-                      <i className="fa-regular fa-user fa-sm me-1"></i>Wahyu Siapa?
+                      <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
                     </p>
                     <button
                       className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
@@ -477,7 +498,7 @@ export default function GuestPage() {
                   <p className="d-inline"> Gift</p>
                   <div className="d-flex justify-content-between align-items-center mt-2">
                     <p className="m-0 p-0" style={{ fontSize: '0.95rem' }}>
-                      <i className="fa-regular fa-user fa-sm me-1"></i>Wahyu Siapa?
+                      <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
                     </p>
                     <button
                       className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
@@ -492,16 +513,16 @@ export default function GuestPage() {
                       <hr className="my-2 py-1" />
                       <div className="d-flex justify-content-between align-items-center mb-2">
                         <p className="m-0 p-0" style={{ fontSize: '0.85rem' }}>
-                          <i className="fa-solid fa-phone-volume me-1"></i>0812345678
+                          <i className="fa-solid fa-phone-volume me-1"></i>0775493481
                         </p>
-                        <CopyButton value="0812345678" />
+                        <CopyButton value="0775493481" />
                       </div>
                       <div className="d-flex justify-content-between align-items-center">
                         <p className="my-0 p-0 text-truncate me-2" style={{ fontSize: '0.85rem' }}>
-                          <i className="fa-solid fa-location-dot me-1"></i>RT 10 RW 02, Desa Pajerukan, Kab.
-                          Banyumas.
+                          <i className="fa-solid fa-location-dot me-1"></i>324/D12 Hòa Hưng, P.Hòa
+                          Hưng, Hồ Chí Minh, Việt Nam.
                         </p>
-                        <CopyButton value="RT 10 RW 02, Desa Pajerukan, Kec. Kalibagor, Kab. Banyumas, Jawa Tengah 53191." />
+                        <CopyButton value="324/D12 Hòa Hưng, P.Hòa Hưng, Hồ Chí Minh, Việt Nam." />
                       </div>
                     </div>
                   </Collapse>
@@ -514,7 +535,7 @@ export default function GuestPage() {
               <div className="container">
                 <div className="border rounded-5 shadow p-3 mb-2">
                   <h2 className="font-esthetic text-center mt-2 mb-4" style={{ fontSize: '2.25rem' }}>
-                    Ucapan &amp; Doa
+                    Hello &amp; Wish
                   </h2>
                   {commentsEnabled ? (
                     <CommentSection token={accessKey} isAdmin={false} config={guestConfig} variant="guest" />
@@ -530,19 +551,20 @@ export default function GuestPage() {
             {/* End */}
             <section className="bg-white-black py-2 no-gap-bottom">
               <div className="container text-center">
-                <p className="pb-2 pt-4" style={{ fontSize: '0.95rem' }}>
-                  Terima kasih atas perhatian dan doa restu Anda, yang menjadi kebahagiaan serta kehormatan
-                  besar bagi kami.
+                <p className="pb-2 pt-4" style={{ fontSize: '1rem' }}>
+                  Xin cảm ơn sự quan tâm và lời chúc phúc của quý
+                  khách.
                 </p>
-                <h2 className="font-esthetic" style={{ fontSize: '2rem' }}>
-                  Wassalamualaikum Warahmatullahi Wabarakatuh
+                <h2 className="font-greatvibes" style={{ fontSize: '2rem' }}>
+                  Sự hiện diện của quý khách là niềm vinh dự và
+                  hạnh phúc của gia đình chúng tôi.
                 </h2>
-                <h2 className="font-arabic pt-4" style={{ fontSize: '2rem' }}>
-                  اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَۙ
+                <h2 className="font-dancingscript pt-4" style={{ fontSize: '2rem' }}>
+                  Trân trọng cảm ơn
                 </h2>
                 <hr className="my-3" />
                 <small>
-                  Build with<i className="fa-solid fa-heart mx-1"></i>Dewanakl
+                  Build with<i className="fa-solid fa-heart mx-1"></i>Duy Khanh
                 </small>
               </div>
             </section>
@@ -553,10 +575,10 @@ export default function GuestPage() {
             <ul className="navbar-nav nav-justified w-100 align-items-center">
               {[
                 ['#home', 'fa-house', 'Home'],
-                ['#bride', 'fa-user-group', 'Mempelai'],
-                ['#wedding-date', 'fa-calendar-check', 'Tanggal'],
-                ['#gallery', 'fa-images', 'Galeri'],
-                ['#comment', 'fa-comments', 'Ucapan'],
+                ['#bride', 'fa-user-group', 'Marriage'],
+                ['#wedding-date', 'fa-calendar-check', 'Date'],
+                ['#gallery', 'fa-images', 'Gallery'],
+                ['#comment', 'fa-comments', 'Wish'],
               ].map(([href, icon, label]) => (
                 <li className="nav-item" key={href}>
                   <a className="nav-link" href={href}>
@@ -586,7 +608,7 @@ export default function GuestPage() {
                 className="img-center-crop rounded-circle border border-3 border-light shadow mb-4 mx-auto"
               />
               <h2 className="font-esthetic mb-4" style={{ fontSize: '2.25rem' }}>
-                Wahyu &amp; Riski
+                {COUPLE}
               </h2>
               {guestName && (
                 <div className="m-2">

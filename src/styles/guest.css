@@ -113,3 +113,22 @@ svg {
 .no-gap-bottom {
     margin-bottom: -0.75rem !important;
 }
+.font-parisienne {
+  font-family: 'Parisienne', cursive;
+}
+
+.font-greatvibes {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-sacramento {
+  font-family: 'Sacramento', cursive;
+}
+
+.font-dancingscript {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-pacifico {
+  font-family: 'Pacifico', cursive;
+}
