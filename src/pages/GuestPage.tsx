@@ -4,7 +4,6 @@ import AOS from 'aos';
 import confetti from 'canvas-confetti';
 
 import { config, asset } from '../config';
-import { request, HTTP_GET } from '../lib/api';
 import type { GuestConfig } from '../lib/types';
 import { useCountdown } from '../hooks/useCountdown';
 import CommentSection from '../components/comment/CommentSection';
@@ -34,8 +33,11 @@ function getQueryParam(name: string): string | null {
   return match ? decodeURIComponent(match[1].replace(/\+/g, ' ')) : null;
 }
 
+const SLIDES = ['/assets/images/bg.webp', '/assets/images/cowo.webp', '/assets/images/cewe.webp'];
+
 export default function GuestPage() {
   const [opened, setOpened] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showStory, setShowStory] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
@@ -55,15 +57,22 @@ export default function GuestPage() {
   }, []);
 
   useEffect(() => {
-    if (!commentsEnabled) {
-      return;
-    }
-    request(HTTP_GET, '/api/v2/config')
-      .token(accessKey)
-      .send<GuestConfig>()
-      .then((res) => setGuestConfig(res.data))
+    if (!commentsEnabled) return;
+    const key = accessKey;
+    const headers: Record<string, string> = key.split('.').length === 3
+      ? { Authorization: `Bearer ${key}` }
+      : { 'x-access-key': key };
+    fetch(`${config.apiUrl}api/v2/config`, { headers })
+      .then(r => r.json())
+      .then(json => { if (json?.data) setGuestConfig(json.data); })
       .catch(() => setGuestConfig(null));
   }, [accessKey, commentsEnabled]);
+
+  useEffect(() => {
+    if (!opened) return;
+    const id = setInterval(() => setSlideIndex(i => (i + 1) % SLIDES.length), 6000);
+    return () => clearInterval(id);
+  }, [opened]);
 
   const open = () => {
     setOpened(true);
@@ -118,6 +127,19 @@ export default function GuestPage() {
         {/* Desktop mode */}
         <div className="sticky-top vh-100 d-none d-sm-block col-sm-5 col-md-6 col-lg-7 col-xl-8 col-xxl-9 overflow-y-hidden m-0 p-0">
           <div className="position-relative bg-white-black d-flex justify-content-center align-items-center vh-100">
+            <div className="d-flex position-absolute w-100 h-100">
+              <div className="position-relative overflow-hidden w-100">
+                {SLIDES.map((src, i) => (
+                  <div
+                    key={i}
+                    className={`position-absolute h-100 w-100 slide-desktop${slideIndex === i ? ' slide-desktop-active' : ''}`}
+                    style={{ opacity: slideIndex === i ? 1 : 0 }}
+                  >
+                    <img src={asset(src)} alt="bg" className="bg-cover-home" style={{ maskImage: 'none', opacity: 0.3 }} />
+                  </div>
+                ))}
+              </div>
+            </div>
             <div className="text-center p-4 bg-overlay-auto rounded-5">
               <h2 className="font-esthetic mb-4" style={{ fontSize: '2rem' }}>
                 {COUPLE}
