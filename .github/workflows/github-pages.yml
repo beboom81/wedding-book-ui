@@ -1,0 +1,64 @@
+name: Deploy UI to GitHub Pages
+
+# Hosts the React UI on GitHub Pages. In the repo:
+#   Settings > Pages > Build and deployment > Source: GitHub Actions
+# Add these repository variables (Settings > Secrets and variables > Actions > Variables):
+#   VITE_API_URL    - your Azure Web App API base url, e.g. https://undangan-api.azurewebsites.net/
+#   VITE_GUEST_KEY  - the public guest access key from the dashboard
+# Optional variables: VITE_WEDDING_TIME, VITE_AUDIO, VITE_CONFETTI
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Build
+        env:
+          # For a project page (user.github.io/<repo>/) set VITE_BASE to "/<repo>/".
+          # For a user/org page or custom domain, leave it as "/".
+          VITE_BASE: ${{ vars.VITE_BASE || '/' }}
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_GUEST_KEY: ${{ vars.VITE_GUEST_KEY }}
+          VITE_WEDDING_TIME: ${{ vars.VITE_WEDDING_TIME }}
+          VITE_AUDIO: ${{ vars.VITE_AUDIO }}
+          VITE_CONFETTI: ${{ vars.VITE_CONFETTI }}
+        run: npm run build
+
+      - name: SPA fallback (copy index.html to 404.html)
+        run: cp dist/index.html dist/404.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
