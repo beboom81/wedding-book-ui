@@ -82,14 +82,28 @@ export default function GuestPage() {
     setOpened(true);
     document.body.scrollIntoView({ behavior: 'instant' });
 
-    confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
     if (config.audio && audioRef.current) {
       audioRef.current.play().then(() => setMusicPlaying(true)).catch(() => undefined);
     }
 
-    // heart confetti shower for 15s (matches original openAnimation)
+    // firework bursts — immediate
+    const fireAt = (x: number, y: number) => {
+      const n = 120 + Math.floor(Math.random() * 80);
+      confetti({ particleCount: Math.floor(n * 0.25), angle: 60, spread: 55, origin: { x, y }, startVelocity: 60, ticks: 200, colors: ['#FFC0CB','#FF1493','#FFD700','#00BFFF','#7CFC00'] });
+      confetti({ particleCount: Math.floor(n * 0.25), angle: 120, spread: 55, origin: { x, y }, startVelocity: 60, ticks: 200, colors: ['#FF6347','#FF69B4','#ADFF2F','#00CED1','#FFD700'] });
+      confetti({ particleCount: Math.floor(n * 0.4), spread: 360, origin: { x, y }, startVelocity: 45, ticks: 200, gravity: 0.8, colors: ['#FFC0CB','#FF1493','#FFD700','#7CFC00','#00BFFF','#FF6347'] });
+      confetti({ particleCount: Math.floor(n * 0.1), spread: 120, origin: { x, y }, startVelocity: 25, decay: 0.92, scalar: 1.4, ticks: 200 });
+    };
+    fireAt(0.2, 0.5);
+    setTimeout(() => fireAt(0.8, 0.4), 200);
+    setTimeout(() => fireAt(0.5, 0.3), 400);
+    setTimeout(() => fireAt(0.1, 0.6), 700);
+    setTimeout(() => fireAt(0.9, 0.5), 900);
+    setTimeout(() => fireAt(0.5, 0.2), 1200);
+
+    // heart shower for 12s after fireworks settle
     setTimeout(() => {
-      const end = Date.now() + 15_000;
+      const end = Date.now() + 12_000;
       const colors = ['#FFC0CB', '#FF1493', '#C71585'];
       const frame = () => {
         const left = end - Date.now();
@@ -97,8 +111,8 @@ export default function GuestPage() {
         colors.forEach(color => {
           confetti({
             particleCount: 1, startVelocity: 0,
-            ticks: Math.max(50, 75 * (left / 15_000)),
-            origin: { x: Math.random(), y: Math.abs(Math.random() - left / 15_000) },
+            ticks: Math.max(50, 75 * (left / 12_000)),
+            origin: { x: Math.random(), y: Math.abs(Math.random() - left / 12_000) },
             colors: [color], shapes: ['heart' as unknown as confetti.Shape],
             gravity: 0.4 + Math.random() * 0.2,
             scalar: 0.8 + Math.random() * 0.8,
@@ -108,7 +122,7 @@ export default function GuestPage() {
         requestAnimationFrame(frame);
       };
       requestAnimationFrame(frame);
-    }, 1500);
+    }, 2000);
 
     setTimeout(() => {
       setWelcomeGone(true);
