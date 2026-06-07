@@ -37,7 +37,9 @@ const SLIDES = ['/assets/images/bg.webp', '/assets/images/cowo.webp', '/assets/i
 
 export default function GuestPage() {
   const [opened, setOpened] = useState(false);
-  const [slideIndex, setSlideIndex] = useState(0);
+  const [welcomeFading, setWelcomeFading] = useState(false);
+  const [welcomeGone, setWelcomeGone] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(-1); // -1 = not yet started
   const [modalSrc, setModalSrc] = useState<string | null>(null);
   const [showStory, setShowStory] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
@@ -70,18 +72,48 @@ export default function GuestPage() {
 
   useEffect(() => {
     if (!opened) return;
+    setSlideIndex(0);
     const id = setInterval(() => setSlideIndex(i => (i + 1) % SLIDES.length), 6000);
     return () => clearInterval(id);
   }, [opened]);
 
   const open = () => {
+    setWelcomeFading(true);
     setOpened(true);
     document.body.scrollIntoView({ behavior: 'instant' });
-    setTimeout(() => AOS.refreshHard(), 100);
+
     confetti({ particleCount: 120, spread: 70, origin: { y: 0.6 } });
     if (config.audio && audioRef.current) {
       audioRef.current.play().then(() => setMusicPlaying(true)).catch(() => undefined);
     }
+
+    // heart confetti shower for 15s (matches original openAnimation)
+    setTimeout(() => {
+      const end = Date.now() + 15_000;
+      const colors = ['#FFC0CB', '#FF1493', '#C71585'];
+      const frame = () => {
+        const left = end - Date.now();
+        if (left <= 0) return;
+        colors.forEach(color => {
+          confetti({
+            particleCount: 1, startVelocity: 0,
+            ticks: Math.max(50, 75 * (left / 15_000)),
+            origin: { x: Math.random(), y: Math.abs(Math.random() - left / 15_000) },
+            colors: [color], shapes: ['heart' as unknown as confetti.Shape],
+            gravity: 0.4 + Math.random() * 0.2,
+            scalar: 0.8 + Math.random() * 0.8,
+            drift: -0.4 + Math.random() * 0.8,
+          });
+        });
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    }, 1500);
+
+    setTimeout(() => {
+      setWelcomeGone(true);
+      AOS.refreshHard();
+    }, 850);
   };
 
   const toggleMusic = () => {
@@ -133,7 +165,7 @@ export default function GuestPage() {
                   <div
                     key={i}
                     className={`position-absolute h-100 w-100 slide-desktop${slideIndex === i ? ' slide-desktop-active' : ''}`}
-                    style={{ opacity: slideIndex === i ? 1 : 0 }}
+                    style={{ opacity: slideIndex >= 0 && slideIndex === i ? 1 : 0 }}
                   >
                     <img src={asset(src)} alt="bg" className="bg-cover-home" style={{ maskImage: 'none', opacity: 0.3 }} />
                   </div>
@@ -617,8 +649,16 @@ export default function GuestPage() {
       </div>
 
       {/* Welcome overlay */}
-      {!opened && (
-        <div className="loading-page bg-white-black" id="welcome">
+      {!welcomeGone && (
+        <div
+          className="loading-page bg-white-black"
+          id="welcome"
+          style={{
+            opacity: welcomeFading ? 0 : 1,
+            transition: 'opacity 0.85s ease',
+            pointerEvents: welcomeFading ? 'none' : undefined,
+          }}
+        >
           <div className="d-flex justify-content-center align-items-center vh-100 overflow-y-auto">
             <div className="d-flex flex-column text-center">
               <h2 className="font-esthetic mb-4" style={{ fontSize: '2.25rem' }}>
@@ -640,7 +680,12 @@ export default function GuestPage() {
                   </p>
                 </div>
               )}
-              <button type="button" className="btn btn-light shadow rounded-4 mt-3 mx-auto" onClick={open}>
+              <button
+                type="button"
+                className="btn btn-light shadow rounded-4 mt-3 mx-auto"
+                onClick={open}
+                disabled={welcomeFading}
+              >
                 <i className="fa-solid fa-envelope-open fa-bounce me-2"></i>Open Invitation
               </button>
             </div>
