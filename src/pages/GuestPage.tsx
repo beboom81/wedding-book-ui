@@ -44,7 +44,8 @@ export default function GuestPage() {
   const [showStory, setShowStory] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const [tfOpen, setTfOpen] = useState(false);
-  const [qrisOpen, setQrisOpen] = useState(false);
+  const [qr1isOpen, setQr1isOpen] = useState(false);
+  const [qr2isOpen, setQr2isOpen] = useState(false);
   const [giftOpen, setGiftOpen] = useState(false);
   const [guestConfig, setGuestConfig] = useState<GuestConfig | null>(null);
   const [activeSection, setActiveSection] = useState('home');
@@ -437,12 +438,12 @@ export default function GuestPage() {
                 <div className="overflow-x-hidden">
                   <div className="py-2" data-aos="fade-right" data-aos-duration="1500">
                     <h2 className="font-esthetic m-0 py-2" style={{ fontSize: '3rem' }}>
-                      Adora Dynasty
+                      Capella: Park View
                     </h2>
                   </div>
                   <div className="py-2" data-aos="fade-left" data-aos-duration="1500">
                     <h2 className="font-dancingscript m-0 py-2" style={{ fontSize: '2rem' }}>
-                      Vào lúc 18:00 Chủ nhật, 13.10.2026
+                      Vào lúc 11:00 Thứ 7, 01.08.2026
                     </h2>
                   </div>
                 </div>
@@ -470,7 +471,7 @@ export default function GuestPage() {
                 </div>
                 <div className="py-2" data-aos="fade-down" data-aos-duration="1500">
                   <a
-                    href="https://maps.app.goo.gl/2Bq7qVTxbJdif2rJ7"
+                    href="https://maps.app.goo.gl/8Lwir8zTfzUZcUe4A"
                     target="_blank"
                     rel="noreferrer"
                     className="btn btn-outline-auto btn-sm rounded-pill shadow mb-2 px-3"
@@ -478,8 +479,7 @@ export default function GuestPage() {
                     <i className="fa-solid fa-map-location-dot me-2"></i>See Google Maps
                   </a>
                   <small className="d-block my-1">
-                    1A Tôn Thất Tùng, Phường Phạm Ngũ Lão, Quận 1,
-                    Thành phố Hồ Chí Minh, Việt Nam.
+                    3 đường Đặng Văn Sâm, phường Đức Nhuận, TP. Hồ Chí Minh, Việt Namv
                   </small>
                 </div>
               </div>
@@ -531,8 +531,8 @@ export default function GuestPage() {
                       <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
                     </p>
                     <button
-                      className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
-                      style={{ fontSize: '0.75rem' }}
+                      className="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 opacity-75"
+                      style={{ fontSize: '0.7rem' }}
                       onClick={() => setTfOpen((o) => !o)}
                     >
                       <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
@@ -562,19 +562,43 @@ export default function GuestPage() {
                       <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
                     </p>
                     <button
-                      className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
-                      style={{ fontSize: '0.75rem' }}
-                      onClick={() => setQrisOpen((o) => !o)}
+                      className="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 opacity-75"
+                      style={{ fontSize: '0.7rem' }}
+                      onClick={() => setQr1isOpen((o) => !o)}
                     >
                       <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
                     </button>
                   </div>
-                  <Collapse in={qrisOpen}>
+                  <Collapse in={qr1isOpen}>
                     <div>
                       <hr className="my-2 py-1" />
                       <div className="d-flex justify-content-center align-items-center">
                         <img
                           src={asset('/assets/images/donate.png')}
+                          alt="donate"
+                          className="img-fluid rounded-3 mx-auto bg-white"
+                        />
+                      </div>
+                    </div>
+                  </Collapse>
+                  <div className="d-flex justify-content-between align-items-center mt-2">
+                    <p className="m-0 p-0" style={{ fontSize: '0.95rem' }}>
+                      <i className="fa-regular fa-user fa-sm me-1"></i>Phạm Nguyễn Ý Duyên
+                    </p>
+                    <button
+                      className="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 opacity-75"
+                      style={{ fontSize: '0.7rem' }}
+                      onClick={() => setQr2isOpen((o) => !o)}
+                    >
+                      <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
+                    </button>
+                  </div>
+                  <Collapse in={qr2isOpen}>
+                    <div>
+                      <hr className="my-2 py-1" />
+                      <div className="d-flex justify-content-center align-items-center">
+                        <img
+                          src={asset('/assets/images/donate_2.jpg')}
                           alt="donate"
                           className="img-fluid rounded-3 mx-auto bg-white"
                         />
@@ -591,8 +615,8 @@ export default function GuestPage() {
                       <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
                     </p>
                     <button
-                      className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
-                      style={{ fontSize: '0.75rem' }}
+                      className="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 opacity-75"
+                      style={{ fontSize: '0.7rem' }}
                       onClick={() => setGiftOpen((o) => !o)}
                     >
                       <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
