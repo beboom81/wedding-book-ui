@@ -6,6 +6,7 @@ import confetti from 'canvas-confetti';
 import { config, asset } from '../config';
 import type { GuestConfig } from '../lib/types';
 import { useCountdown } from '../hooks/useCountdown';
+import { useLang } from '../context/LangContext';
 import CommentSection from '../components/comment/CommentSection';
 import ImageModal from '../components/guest/ImageModal';
 import FloatingButtons from '../components/guest/FloatingButtons';
@@ -19,13 +20,6 @@ const PLACE_DATE = 'Hồ Chí Minh, 01 August 2026';
 
 const gallery1 = [1, 2, 3];
 const gallery2 = [4, 5, 6];
-
-const loveStory: [string, string][] = [
-  ['✨ Lần gặp đầu tiên', 'Nơi bắt đầu câu chuyện của chúng mình.'],
-  ['💞 Hẹn hò', 'Những ngày tháng cùng nhau tạo nên kỷ niệm.'],
-  ['💥 Những lần cãi nhau', 'Cãi nhau rồi lại thương nhau nhiều hơn.'],
-  ['💍 Cầu hôn', 'Và rồi chúng mình quyết định về chung một nhà.'],
-];
 
 function getQueryParam(name: string): string | null {
   const href = window.location.href;
@@ -55,6 +49,8 @@ export default function GuestPage() {
   const guestName = useMemo(() => getQueryParam('to'), []);
   const accessKey = useMemo(() => getQueryParam('k') ?? config.guestKey, []);
   const commentsEnabled = !!accessKey;
+
+  const { t } = useLang();
 
   useEffect(() => {
     AOS.init({ once: true, duration: 1000 });
@@ -232,7 +228,7 @@ export default function GuestPage() {
               />
               <div className="position-relative text-center bg-overlay-auto" style={{ backgroundColor: 'unset' }}>
                 <h1 className="font-esthetic pt-5 pb-4 fw-medium" style={{ fontSize: '2.25rem' }}>
-                  Wedding invitation
+                  {t.weddingInvitation}
                 </h1>
                 <img
                   src={asset('/assets/images/bg.webp')}
@@ -252,7 +248,7 @@ export default function GuestPage() {
                   </div>
                 </div>
                 <p className="pb-4 m-0 text-secondary" style={{ fontSize: '0.825rem' }}>
-                  Scroll Down
+                  {t.scrollDown}
                 </p>
               </div>
             </section>
@@ -262,15 +258,13 @@ export default function GuestPage() {
             {/* Bride */}
             <section className="bg-white-black text-center" id="bride">
               <h2 className="font-greatvibes py-4 m-0" style={{ fontSize: '2rem' }}>
-                Lễ Thành Hôn
+                {t.weddingCeremony}
               </h2>
               <h2 className="font-esthetic py-4 m-0" style={{ fontSize: '2rem' }}>
-                Match made in heaven
+                {t.matchMadeInHeaven}
               </h2>
               <p className="pb-4 px-2 m-0" style={{ fontSize: '0.95rem' }}>
-                Sau hành trình dài cùng nhau viết nên câu chuyện tình yêu,
-                chúng tôi quyết định bước sang chương mới - chương
-                mang tên Hôn Nhân.
+                {t.coupleStory}
               </p>
 
               <div className="overflow-x-hidden pb-4">
@@ -287,16 +281,16 @@ export default function GuestPage() {
                       Đinh Duy Khanh
                     </h2>
                     <p className="mt-3 mb-1" style={{ fontSize: '1.25rem' }}>
-                      Quý nam
+                      {t.groom}
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      Cha Đinh Văn Lê
+                      {t.father} Đinh Văn Lê
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
                       &
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      Mẹ Nguyễn Kiều Diễm Phương
+                      {t.mother} Nguyễn Kiều Diễm Phương
                     </p>
                   </div>
                   <Love top="90%" left="5%" />
@@ -319,16 +313,16 @@ export default function GuestPage() {
                       Phạm Nguyễn Ý Duyên
                     </h2>
                     <p className="mt-3 mb-1" style={{ fontSize: '1.25rem' }}>
-                      Trưởng nữ
+                      {t.bride}
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      Cha Phạm Vũ Bính
+                      {t.father} Phạm Vũ Bính
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
                       &
                     </p>
                     <p className="mb-0" style={{ fontSize: '0.95rem' }}>
-                      Mẹ Nguyễn Thị Thu Nguyệt
+                      {t.mother} Nguyễn Thị Thu Nguyệt
                     </p>
                   </div>
                   <Love top="90%" left="5%" />
@@ -342,17 +336,16 @@ export default function GuestPage() {
             <section className="bg-light-dark pt-2 pb-4">
               <div className="container text-center">
                 <h2 className="font-esthetic pt-2 pb-1 m-0" style={{ fontSize: '2rem' }}>
-                  Love Idiom
+                  {t.loveIdiomTitle}
                 </h2>
                 <div className="bg-theme-auto mt-4 p-3 shadow rounded-4" data-aos="fade-down" data-aos-duration="2000">
                   <p className="p-1 mb-2" style={{ fontSize: '0.95rem' }}>
-                    Hai trái tim chung một nhịp, hai cuộc đời chung một lối
+                    {t.idiom1}
                   </p>
                 </div>
                 <div className="bg-theme-auto mt-4 p-3 shadow rounded-4" data-aos="fade-down" data-aos-duration="2000">
                   <p className="p-1 mb-2" style={{ fontSize: '0.95rem' }}>
-                    Duyên do trời định, phận do người tạo – hạnh phúc
-                    do đôi ta nắm giữ
+                    {t.idiom2}
                   </p>
                 </div>
               </div>
@@ -363,7 +356,7 @@ export default function GuestPage() {
               <div className="container">
                 <div className="bg-theme-auto rounded-5 shadow p-3">
                   <h2 className="font-esthetic text-center py-2 mb-2" style={{ fontSize: '2.125rem' }}>
-                    Love Story
+                    {t.loveStoryTitle}
                   </h2>
                   <div className="position-relative">
                     {!showStory && (
@@ -375,7 +368,7 @@ export default function GuestPage() {
                           className="btn btn-outline-auto btn-sm rounded-4 shadow-sm"
                           onClick={() => setShowStory(true)}
                         >
-                          <i className="fa-solid fa-heart fa-bounce me-2"></i>Lắng nghe câu chuyện
+                          <i className="fa-solid fa-heart fa-bounce me-2"></i>{t.readOurStory}
                         </button>
                       </div>
                     )}
@@ -383,7 +376,7 @@ export default function GuestPage() {
                       className="overflow-y-scroll overflow-x-hidden p-2 with-scrollbar"
                       style={{ height: '15rem', filter: showStory ? 'none' : 'blur(5px)' }}
                     >
-                      {loveStory.map(([t, body], i) => (
+                      {t.loveStory.map(([title, body], i) => (
                         <div className="row" key={i}>
                           <div className="col-auto position-relative">
                             <p
@@ -395,7 +388,7 @@ export default function GuestPage() {
                             <hr className="position-absolute top-0 start-50 translate-middle-x border border-secondary h-100 z-0 opacity-100 m-0 rounded-4 shadow-none" />
                           </div>
                           <div className="col mt-1 mb-3 ps-0">
-                            <p className="fw-bold mb-2">{t}</p>
+                            <p className="fw-bold mb-2">{title}</p>
                             <p className="small mb-0">{body}</p>
                           </div>
                         </div>
@@ -412,15 +405,15 @@ export default function GuestPage() {
             <section className="bg-white-black pb-2" id="wedding-date">
               <div className="container text-center">
                 <h2 className="font-esthetic py-4 m-0" style={{ fontSize: '2.25rem' }}>
-                  Happy moments
+                  {t.happyMoments}
                 </h2>
                 <div className="border rounded-pill shadow py-2 px-4 mt-2 mb-4">
                   <div className="row justify-content-center">
                     {[
-                      ['Ngày', time.day],
-                      ['Giờ', time.hour],
-                      ['Phút', time.minute],
-                      ['Giây', time.second],
+                      [t.days, time.day],
+                      [t.hours, time.hour],
+                      [t.minutes, time.minute],
+                      [t.seconds, time.second],
                     ].map(([label, val]) => (
                       <div className="col-3 p-1" key={label}>
                         <p className="d-inline m-0 p-0" style={{ fontSize: '1.25rem' }}>
@@ -432,8 +425,7 @@ export default function GuestPage() {
                   </div>
                 </div>
                 <p className="py-2 m-0" style={{ fontSize: '0.95rem' }}>
-                  Trân trọng kính mời quý vị đến dự lễ thành
-                  hôn của chúng tôi tại:
+                  {t.cordiallyInvited}
                 </p>
                 <div className="overflow-x-hidden">
                   <div className="py-2" data-aos="fade-right" data-aos-duration="1500">
@@ -443,13 +435,12 @@ export default function GuestPage() {
                   </div>
                   <div className="py-2" data-aos="fade-left" data-aos-duration="1500">
                     <h2 className="font-dancingscript m-0 py-2" style={{ fontSize: '2rem' }}>
-                      Vào lúc 11:00 Thứ 7, 01.08.2026
+                      {t.weddingTime}
                     </h2>
                   </div>
                 </div>
                 <p className="py-2 m-0" style={{ fontSize: '0.95rem' }}>
-                  Mong quý khách ưu tiên trang phục cùng tông màu để
-                  hòa hợp không gian buổi tiệc:
+                  {t.dressCode}
                 </p>
                 <div className="py-2" data-aos="fade-down" data-aos-duration="1500">
                   <div className="d-flex justify-content-center align-items-center mb-3">
@@ -476,10 +467,10 @@ export default function GuestPage() {
                     rel="noreferrer"
                     className="btn btn-outline-auto btn-sm rounded-pill shadow mb-2 px-3"
                   >
-                    <i className="fa-solid fa-map-location-dot me-2"></i>See Google Maps
+                    <i className="fa-solid fa-map-location-dot me-2"></i>{t.seeGoogleMaps}
                   </a>
                   <small className="d-block my-1">
-                    3 đường Đặng Văn Sâm, phường Đức Nhuận, TP. Hồ Chí Minh, Việt Namv
+                    {t.venueAddress}
                   </small>
                 </div>
               </div>
@@ -490,7 +481,7 @@ export default function GuestPage() {
               <div className="container">
                 <div className="border rounded-5 shadow p-3">
                   <h2 className="font-esthetic text-center py-2 m-0" style={{ fontSize: '2.25rem' }}>
-                    Gallery
+                    {t.galleryTitle}
                   </h2>
                   {[gallery1, gallery2].map((set, idx) => (
                     <Carousel key={idx} className="mt-4" data-aos="fade-up" data-aos-duration="1500">
@@ -516,16 +507,15 @@ export default function GuestPage() {
             <section className="bg-light-dark pb-3">
               <div className="container text-center">
                 <h2 className="font-esthetic pt-3 mb-4" style={{ fontSize: '2.25rem' }}>
-                  Love Gift
+                  {t.loveGiftTitle}
                 </h2>
                 <p className="mb-1" style={{ fontSize: '0.95rem' }}>
-                  Với tất cả sự trân trọng, nếu quý khách muốn
-                  gửi tặng chúng tôi chút tấm lòng, xin vui lòng thông qua:
+                  {t.loveGiftDesc}
                 </p>
 
                 <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start" data-aos="fade-up" data-aos-duration="2500">
                   <i className="fa-solid fa-money-bill-transfer"></i>
-                  <p className="d-inline"> Transfer/Chuyển khoản</p>
+                  <p className="d-inline"> {t.bankTransfer}</p>
                   <div className="d-flex justify-content-between align-items-center mt-2">
                     <p className="m-0 p-0" style={{ fontSize: '0.95rem' }}>
                       <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
@@ -535,7 +525,7 @@ export default function GuestPage() {
                       style={{ fontSize: '0.75rem' }}
                       onClick={() => setTfOpen((o) => !o)}
                     >
-                      <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
+                      <i className="fa-solid fa-circle-info fa-sm me-1"></i>{t.infoBtn}
                     </button>
                   </div>
                   <Collapse in={tfOpen}>
@@ -566,7 +556,7 @@ export default function GuestPage() {
                       style={{ fontSize: '0.75rem' }}
                       onClick={() => setQr1isOpen((o) => !o)}
                     >
-                      <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
+                      <i className="fa-solid fa-circle-info fa-sm me-1"></i>{t.infoBtn}
                     </button>
                   </div>
                   <Collapse in={qr1isOpen}>
@@ -590,7 +580,7 @@ export default function GuestPage() {
                       style={{ fontSize: '0.75rem' }}
                       onClick={() => setQr2isOpen((o) => !o)}
                     >
-                      <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
+                      <i className="fa-solid fa-circle-info fa-sm me-1"></i>{t.infoBtn}
                     </button>
                   </div>
                   <Collapse in={qr2isOpen}>
@@ -609,7 +599,7 @@ export default function GuestPage() {
 
                 <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start" data-aos="fade-up" data-aos-duration="2500">
                   <i className="fa-solid fa-gift fa-lg"></i>
-                  <p className="d-inline"> Gift</p>
+                  <p className="d-inline"> {t.giftLabel}</p>
                   <div className="d-flex justify-content-between align-items-center mt-2">
                     <p className="m-0 p-0" style={{ fontSize: '0.95rem' }}>
                       <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
@@ -619,7 +609,7 @@ export default function GuestPage() {
                       style={{ fontSize: '0.75rem' }}
                       onClick={() => setGiftOpen((o) => !o)}
                     >
-                      <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
+                      <i className="fa-solid fa-circle-info fa-sm me-1"></i>{t.infoBtn}
                     </button>
                   </div>
                   <Collapse in={giftOpen}>
@@ -633,10 +623,9 @@ export default function GuestPage() {
                       </div>
                       <div className="d-flex justify-content-between align-items-center">
                         <p className="my-0 p-0 text-truncate me-2" style={{ fontSize: '0.85rem' }}>
-                          <i className="fa-solid fa-location-dot me-1"></i>324/D12 Hòa Hưng, P.Hòa
-                          Hưng, Hồ Chí Minh, Việt Nam.
+                          <i className="fa-solid fa-location-dot me-1"></i>18 Lê Văn Khương, Đông Thạnh, Hồ Chí Minh, Việt Nam.
                         </p>
-                        <CopyButton value="324/D12 Hòa Hưng, P.Hòa Hưng, Hồ Chí Minh, Việt Nam." />
+                        <CopyButton value="18 Lê Văn Khương, Đông Thạnh, Hồ Chí Minh, Việt Nam." />
                       </div>
                     </div>
                   </Collapse>
@@ -649,12 +638,12 @@ export default function GuestPage() {
               <div className="container">
                 <div className="border rounded-5 shadow p-3 mb-2">
                   <h2 className="font-esthetic text-center mt-2 mb-4" style={{ fontSize: '2.25rem' }}>
-                    Hello &amp; Wish
+                    {t.wishTitle}
                   </h2>
                   {commentsEnabled ? (
                     <CommentSection token={accessKey} isAdmin={false} config={guestConfig} variant="guest" />
                   ) : (
-                    <p className="text-center m-0">Comment feature is disabled.</p>
+                    <p className="text-center m-0">{t.commentDisabled}</p>
                   )}
                 </div>
               </div>
@@ -666,19 +655,17 @@ export default function GuestPage() {
             <section className="bg-white-black py-2 no-gap-bottom">
               <div className="container text-center">
                 <p className="pb-2 pt-4" style={{ fontSize: '1rem' }}>
-                  Xin cảm ơn sự quan tâm và lời chúc phúc của quý
-                  khách.
+                  {t.thankYouDesc}
                 </p>
                 <h2 className="font-greatvibes" style={{ fontSize: '2rem' }}>
-                  Sự hiện diện của quý khách là niềm vinh dự và
-                  hạnh phúc của gia đình chúng tôi.
+                  {t.thankYouPresence}
                 </h2>
                 <h2 className="font-dancingscript pt-4" style={{ fontSize: '2rem' }}>
-                  Trân trọng cảm ơn
+                  {t.thankYou}
                 </h2>
                 <hr className="my-3" />
                 <small>
-                  Build with<i className="fa-solid fa-heart mx-1"></i>Duy Khanh
+                  {t.buildWith}<i className="fa-solid fa-heart mx-1"></i>Duy Khanh
                 </small>
               </div>
             </section>
@@ -688,11 +675,11 @@ export default function GuestPage() {
           <nav className="navbar navbar-expand sticky-bottom rounded-top-4 border-top p-0" id="navbar-menu">
             <ul className="navbar-nav nav-justified w-100 align-items-center">
               {([
-                ['home', 'fa-house', 'Home'],
-                ['bride', 'fa-user-group', 'Marriage'],
-                ['wedding-date', 'fa-calendar-check', 'Date'],
-                ['gallery', 'fa-images', 'Gallery'],
-                ['comment', 'fa-comments', 'Wish'],
+                ['home', 'fa-house', t.navHome],
+                ['bride', 'fa-user-group', t.navMarriage],
+                ['wedding-date', 'fa-calendar-check', t.navDate],
+                ['gallery', 'fa-images', t.navGallery],
+                ['comment', 'fa-comments', t.navWish],
               ] as [string, string, string][]).map(([id, icon, label]) => (
                 <li className="nav-item" key={id}>
                   <button
@@ -725,7 +712,7 @@ export default function GuestPage() {
           <div className="d-flex justify-content-center align-items-center vh-100 overflow-y-auto">
             <div className="d-flex flex-column text-center">
               <h2 className="font-esthetic mb-4" style={{ fontSize: '2.25rem' }}>
-                The Wedding Of
+                {t.theWeddingOf}
               </h2>
               <img
                 src={asset('/assets/images/bg.webp')}
@@ -737,7 +724,7 @@ export default function GuestPage() {
               </h2>
               {guestName && (
                 <div className="m-2">
-                  <small className="mt-0 mb-1 mx-0 p-0">Kepada Yth Bapak/Ibu/Saudara/i</small>
+                  <small className="mt-0 mb-1 mx-0 p-0">{t.dearGuest}</small>
                   <p className="m-0 p-0" style={{ fontSize: '1.25rem' }}>
                     {guestName}
                   </p>
@@ -749,7 +736,7 @@ export default function GuestPage() {
                 onClick={open}
                 disabled={welcomeFading}
               >
-                <i className="fa-solid fa-envelope-open fa-bounce me-2"></i>Open Invitation
+                <i className="fa-solid fa-envelope-open fa-bounce me-2"></i>{t.openInvitation}
               </button>
             </div>
           </div>

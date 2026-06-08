@@ -1,4 +1,5 @@
 import { useTheme } from '../../context/ThemeContext';
+import { useLang } from '../../context/LangContext';
 
 interface Props {
   showMusic: boolean;
@@ -8,12 +9,25 @@ interface Props {
 
 export default function FloatingButtons({ showMusic, musicPlaying, onToggleMusic }: Props) {
   const { toggle } = useTheme();
+  const { lang, toggleLang } = useLang();
 
   return (
     <div
-      className="d-flex position-fixed flex-column"
+      className="d-flex position-fixed flex-column align-items-center"
       style={{ bottom: '10vh', right: '2vh', zIndex: 1030 }}
     >
+      {/* Language toggle */}
+      <button
+        type="button"
+        className="btn bg-light-dark border btn-sm rounded-circle btn-transparent shadow-sm mt-3"
+        aria-label="Change language"
+        onClick={toggleLang}
+        style={{ fontSize: '0.65rem', fontWeight: 700, width: '2rem', height: '2rem', padding: 0 }}
+      >
+        {lang.toUpperCase()}
+      </button>
+
+      {/* Theme toggle */}
       <button
         type="button"
         className="btn bg-light-dark border btn-sm rounded-circle btn-transparent shadow-sm mt-3"
@@ -23,6 +37,7 @@ export default function FloatingButtons({ showMusic, musicPlaying, onToggleMusic
         <i className="fa-solid fa-circle-half-stroke"></i>
       </button>
 
+      {/* Music toggle */}
       {showMusic && (
         <button
           type="button"

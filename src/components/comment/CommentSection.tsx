@@ -3,6 +3,7 @@ import { CommentProvider, useComments } from './CommentContext';
 import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
 import type { GuestConfig } from '../../lib/types';
+import { useLang } from '../../context/LangContext';
 
 interface Props {
   token: string;
@@ -21,6 +22,7 @@ export default function CommentSection({ token, isAdmin, config, variant }: Prop
 
 function Inner({ variant }: { variant: 'guest' | 'admin' }) {
   const { lists, loading, reload, page, count, per, totalPages, nextPage, prevPage } = useComments();
+  const { t } = useLang();
 
   useEffect(() => {
     reload();
@@ -30,7 +32,7 @@ function Inner({ variant }: { variant: 'guest' | 'admin' }) {
   const showPagination = count > per || page > 0;
 
   const emptyMessage =
-    variant === 'guest' ? "📢 Let's share this invitation to get more comments! 🎉" : 'No comments yet.';
+    variant === 'guest' ? t.shareInvitation : 'No comments yet.';
 
   return (
     <>
@@ -55,7 +57,7 @@ function Inner({ variant }: { variant: 'guest' | 'admin' }) {
           <ul className="pagination mb-2 shadow-sm rounded-4">
             <li className={`page-item ${page === 0 ? 'disabled' : ''}`}>
               <button className="page-link rounded-start-4" onClick={prevPage} disabled={page === 0}>
-                <i className="fa-solid fa-circle-left me-1"></i>Prev
+                <i className="fa-solid fa-circle-left me-1"></i>{t.prev}
               </button>
             </li>
             <li className="page-item disabled">
@@ -69,7 +71,7 @@ function Inner({ variant }: { variant: 'guest' | 'admin' }) {
                 onClick={nextPage}
                 disabled={current >= totalPages}
               >
-                Next<i className="fa-solid fa-circle-right ms-1"></i>
+                {t.next}<i className="fa-solid fa-circle-right ms-1"></i>
               </button>
             </li>
           </ul>

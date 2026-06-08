@@ -146,3 +146,33 @@ svg {
 .font-pacifico {
   font-family: 'Pacifico', cursive;
 }
+
+/* ── Vietnamese font overrides ─────────────────────────────────────────────
+   Sacramento / Great Vibes / Dancing Script are Latin-only script fonts;
+   they have no Vietnamese glyphs and cause ugly mixed rendering.
+   Cormorant Garamond is a romantic serif with full Vietnamese support.
+   Be Vietnam Pro is a clean sans-serif designed specifically for Vietnamese.
+   ────────────────────────────────────────────────────────────────────────── */
+html[lang="vi"] body {
+  font-family: 'Be Vietnam Pro', sans-serif !important;
+}
+
+html[lang="vi"] .font-esthetic {
+  font-family: 'Playfair Display', serif !important;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+html[lang="vi"] .font-greatvibes {
+  font-family: 'Playfair Display', serif !important;
+  font-style: italic;
+  font-weight: 500;
+}
+
+html[lang="vi"] .font-dancingscript {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}

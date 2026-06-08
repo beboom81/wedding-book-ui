@@ -3,11 +3,13 @@ import { useComments } from './CommentContext';
 import GifPicker, { type SelectedGif } from './GifPicker';
 import type { CommentItem } from '../../lib/types';
 import { ask, convertMarkdownToHTML, escapeHtml, parseUserAgent } from '../../lib/util';
+import { useLang } from '../../context/LangContext';
 
 const MAX_LEN = 300;
 
 export default function CommentCard({ c }: { c: CommentItem }) {
   const { isAdmin, config, owns, likes, like, unlike, create, update, remove } = useComments();
+  const { t } = useLang();
 
   const [showReplies, setShowReplies] = useState(false);
   const [replyOpen, setReplyOpen] = useState(false);
@@ -41,7 +43,7 @@ export default function CommentCard({ c }: { c: CommentItem }) {
   };
 
   const onDelete = async () => {
-    if (!ask('Are you sure?')) {
+    if (!ask(t.areYouSure)) {
       return;
     }
     const own = owns.get<string>(c.uuid) ?? c.own;
@@ -98,7 +100,7 @@ export default function CommentCard({ c }: { c: CommentItem }) {
               style={{ fontSize: '0.85rem' }}
               onClick={() => setExpanded((e) => !e)}
             >
-              {expanded ? 'Sebagian' : 'Selengkapnya'}
+              {expanded ? t.readLess : t.readMore}
             </a>
           </p>
         )}
@@ -142,7 +144,7 @@ export default function CommentCard({ c }: { c: CommentItem }) {
               onClick={() => setReplyOpen((o) => !o)}
               className="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm"
             >
-              Reply
+              {t.reply}
             </button>
           )}
           {showEdit && (
@@ -151,7 +153,7 @@ export default function CommentCard({ c }: { c: CommentItem }) {
               onClick={() => setEditOpen((o) => !o)}
               className="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm"
             >
-              Edit
+              {t.edit}
             </button>
           )}
           {showDelete && (
@@ -160,7 +162,7 @@ export default function CommentCard({ c }: { c: CommentItem }) {
               onClick={onDelete}
               className="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm"
             >
-              Delete
+              {t.delete}
             </button>
           )}
         </div>
@@ -172,7 +174,7 @@ export default function CommentCard({ c }: { c: CommentItem }) {
             role="button"
             onClick={() => setShowReplies((s) => !s)}
           >
-            {showReplies ? 'Hide replies' : `Show replies (${c.comments.length})`}
+            {showReplies ? t.hideReplies : t.showReplies(c.comments.length)}
           </a>
         )}
 
@@ -254,6 +256,7 @@ function ReplyForm({
   const [gifOpen, setGifOpen] = useState(false);
   const [gif, setGif] = useState<SelectedGif | null>(null);
   const [busy, setBusy] = useState(false);
+  const { t } = useLang();
 
   const submit = async () => {
     setBusy(true);
@@ -267,7 +270,7 @@ function ReplyForm({
   return (
     <div className="my-2">
       <p className="my-1 mx-0 p-0" style={{ fontSize: '0.95rem' }}>
-        <i className="fa-solid fa-reply me-2"></i>Reply
+        <i className="fa-solid fa-reply me-2"></i>{t.reply}
       </p>
       {gifOpen ? (
         <GifPicker tenorKey={tenorKey} onSelect={setGif} onBack={() => { setGif(null); setGifOpen(false); }} />
@@ -287,7 +290,7 @@ function ReplyForm({
             className="form-control shadow-sm rounded-4 mb-2"
             minLength={1}
             maxLength={1000}
-            placeholder="Type reply comment"
+            placeholder={t.replyPlaceholder}
             rows={3}
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -300,7 +303,7 @@ function ReplyForm({
           onClick={onCancel}
           className="btn btn-sm btn-outline-auto rounded-4 py-0 me-1"
         >
-          Cancel
+          {t.cancel}
         </button>
         <button
           style={{ fontSize: '0.8rem' }}
@@ -308,7 +311,7 @@ function ReplyForm({
           disabled={busy}
           className="btn btn-sm btn-outline-auto rounded-4 py-0"
         >
-          Send
+          {t.send}
         </button>
       </div>
     </div>
@@ -333,6 +336,7 @@ function EditForm({
   const [presence, setPresence] = useState(comment.presence ? '1' : '2');
   const [gif, setGif] = useState<SelectedGif | null>(null);
   const [busy, setBusy] = useState(false);
+  const { t } = useLang();
 
   const submit = async () => {
     setBusy(true);
@@ -346,7 +350,7 @@ function EditForm({
   return (
     <div className="my-2">
       <p className="my-1 mx-0 p-0" style={{ fontSize: '0.95rem' }}>
-        <i className="fa-solid fa-pen me-2"></i>Edit
+        <i className="fa-solid fa-pen me-2"></i>{t.edit}
       </p>
       {allowPresence && (
         <select
@@ -354,8 +358,8 @@ function EditForm({
           value={presence}
           onChange={(e) => setPresence(e.target.value)}
         >
-          <option value="1">&#9989; Datang</option>
-          <option value="2">&#10060; Berhalangan</option>
+          <option value="1">{t.attending}</option>
+          <option value="2">{t.notAttending}</option>
         </select>
       )}
       {isGif ? (
@@ -366,7 +370,7 @@ function EditForm({
           className="form-control shadow-sm rounded-4 mb-2"
           minLength={1}
           maxLength={1000}
-          placeholder="Type update comment"
+          placeholder={t.updateCommentPlaceholder}
           rows={3}
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -378,7 +382,7 @@ function EditForm({
           onClick={onCancel}
           className="btn btn-sm btn-outline-auto rounded-4 py-0 me-1"
         >
-          Cancel
+          {t.cancel}
         </button>
         <button
           style={{ fontSize: '0.8rem' }}
@@ -386,7 +390,7 @@ function EditForm({
           disabled={busy}
           className="btn btn-sm btn-outline-auto rounded-4 py-0"
         >
-          Update
+          {t.update}
         </button>
       </div>
     </div>

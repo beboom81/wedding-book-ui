@@ -10,18 +10,21 @@ import './styles/guest.css';
 import './styles/admin.css';
 
 import { ThemeProvider } from './context/ThemeContext';
+import { LangProvider } from './context/LangContext';
 import GuestPage from './pages/GuestPage';
 import DashboardPage from './pages/DashboardPage';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<GuestPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-        </Routes>
-      </HashRouter>
+      <LangProvider>
+        <HashRouter>
+          <Routes>
+            <Route path="/" element={<GuestPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+          </Routes>
+        </HashRouter>
+      </LangProvider>
     </ThemeProvider>
   </StrictMode>,
 );

@@ -3,6 +3,7 @@ import { useComments } from './CommentContext';
 import GifPicker, { type SelectedGif } from './GifPicker';
 import { storage } from '../../lib/storage';
 import { notify } from '../../lib/util';
+import { useLang } from '../../context/LangContext';
 
 const info = storage('weddingbook_information');
 
@@ -13,6 +14,7 @@ interface Props {
 /** Top-level comment form. Guests also enter name + attendance. */
 export default function CommentForm({ variant }: Props) {
   const { config, create } = useComments();
+  const { t } = useLang();
   const tenorKey = config?.tenor_key ?? '';
 
   const [name, setName] = useState<string>(info.get<string>('name') ?? '');
@@ -29,15 +31,15 @@ export default function CommentForm({ variant }: Props) {
 
   const send = async () => {
     if (isGuest && name.trim().length === 0) {
-      notify('Name cannot be empty.').warning();
+      notify(t.nameEmpty).warning();
       return;
     }
     if (isGuest && presence === '0') {
-      notify('Please select your attendance status.').warning();
+      notify(t.attendanceEmpty).warning();
       return;
     }
     if (!gif && comment.trim().length === 0) {
-      notify('Comments cannot be empty.').warning();
+      notify(t.commentEmpty).warning();
       return;
     }
 
@@ -72,7 +74,7 @@ export default function CommentForm({ variant }: Props) {
         <>
           <div className="mb-3">
             <label htmlFor="form-name" className="form-label my-1">
-              <i className="fa-solid fa-person me-2"></i>Tên
+              <i className="fa-solid fa-person me-2"></i>{t.nameLabel}
             </label>
             <input
               dir="auto"
@@ -81,7 +83,7 @@ export default function CommentForm({ variant }: Props) {
               id="form-name"
               minLength={2}
               maxLength={50}
-              placeholder="Nguyễn Văn A"
+              placeholder={t.namePlaceholder}
               autoComplete="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -90,7 +92,7 @@ export default function CommentForm({ variant }: Props) {
 
           <div className="mb-3">
             <label htmlFor="form-presence" className="form-label my-1">
-              <i className="fa-solid fa-person-circle-question me-2"></i>Tham dự
+              <i className="fa-solid fa-person-circle-question me-2"></i>{t.attendanceLabel}
             </label>
             <select
               className="form-select shadow-sm rounded-4"
@@ -98,9 +100,9 @@ export default function CommentForm({ variant }: Props) {
               value={presence}
               onChange={(e) => setPresence(e.target.value)}
             >
-              <option value="0">Xác nhận tham dự</option>
-              <option value="1">&#9989; Có á</option>
-              <option value="2">&#10060; Bận mất rồi</option>
+              <option value="0">{t.confirmAttendance}</option>
+              <option value="1">{t.willAttend}</option>
+              <option value="2">{t.wontAttend}</option>
             </select>
           </div>
         </>
@@ -110,7 +112,7 @@ export default function CommentForm({ variant }: Props) {
         <div className="d-block mb-3">
           <label htmlFor="form-comment" className="form-label my-1">
             <i className="fa-solid fa-comment me-2"></i>
-            {isGuest ? 'Comment' : 'Comment'}
+            {t.commentLabel}
           </label>
           <div className="position-relative">
             {tenorKey && (
@@ -130,7 +132,7 @@ export default function CommentForm({ variant }: Props) {
               rows={isGuest ? 4 : 3}
               minLength={1}
               maxLength={1000}
-              placeholder={isGuest ? 'Lời chúc..' : 'Type to comment'}
+              placeholder={isGuest ? t.commentPlaceholder : 'Type to comment'}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
@@ -160,7 +162,7 @@ export default function CommentForm({ variant }: Props) {
           ) : (
             <i className="fa-solid fa-paper-plane me-2"></i>
           )}
-          Send
+          {t.send}
         </button>
       </div>
     </div>
