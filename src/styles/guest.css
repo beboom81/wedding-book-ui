@@ -4,6 +4,12 @@
 html {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
+    scroll-behavior: smooth;
+}
+
+.nav-link-active {
+    color: var(--bs-primary) !important;
+    font-weight: 600;
 }
 
 .with-scrollbar {

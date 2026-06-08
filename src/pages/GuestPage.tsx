@@ -47,6 +47,7 @@ export default function GuestPage() {
   const [qrisOpen, setQrisOpen] = useState(false);
   const [giftOpen, setGiftOpen] = useState(false);
   const [guestConfig, setGuestConfig] = useState<GuestConfig | null>(null);
+  const [activeSection, setActiveSection] = useState('home');
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const time = useCountdown(config.weddingTime);
@@ -75,6 +76,27 @@ export default function GuestPage() {
     setSlideIndex(0);
     const id = setInterval(() => setSlideIndex(i => (i + 1) % SLIDES.length), 6000);
     return () => clearInterval(id);
+  }, [opened]);
+
+  useEffect(() => {
+    if (!opened) return;
+    const ids = ['home', 'bride', 'wedding-date', 'gallery', 'comment'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+            break;
+          }
+        }
+      },
+      { threshold: 0.35 },
+    );
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, [opened]);
 
   const open = () => {
@@ -641,20 +663,23 @@ export default function GuestPage() {
           {/* Navbar Bottom */}
           <nav className="navbar navbar-expand sticky-bottom rounded-top-4 border-top p-0" id="navbar-menu">
             <ul className="navbar-nav nav-justified w-100 align-items-center">
-              {[
-                ['#home', 'fa-house', 'Home'],
-                ['#bride', 'fa-user-group', 'Marriage'],
-                ['#wedding-date', 'fa-calendar-check', 'Date'],
-                ['#gallery', 'fa-images', 'Gallery'],
-                ['#comment', 'fa-comments', 'Wish'],
-              ].map(([href, icon, label]) => (
-                <li className="nav-item" key={href}>
-                  <a className="nav-link" href={href}>
+              {([
+                ['home', 'fa-house', 'Home'],
+                ['bride', 'fa-user-group', 'Marriage'],
+                ['wedding-date', 'fa-calendar-check', 'Date'],
+                ['gallery', 'fa-images', 'Gallery'],
+                ['comment', 'fa-comments', 'Wish'],
+              ] as [string, string, string][]).map(([id, icon, label]) => (
+                <li className="nav-item" key={id}>
+                  <button
+                    className={`nav-link btn btn-link text-decoration-none${activeSection === id ? ' nav-link-active' : ''}`}
+                    onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                  >
                     <i className={`fa-solid ${icon}`}></i>
                     <span className="d-block" style={{ fontSize: '0.7rem' }}>
                       {label}
                     </span>
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
