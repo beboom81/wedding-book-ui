@@ -531,8 +531,8 @@ export default function GuestPage() {
                       <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
                     </p>
                     <button
-                      className="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 opacity-75"
-                      style={{ fontSize: '0.7rem' }}
+                      className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
+                      style={{ fontSize: '0.75rem' }}
                       onClick={() => setTfOpen((o) => !o)}
                     >
                       <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
@@ -562,8 +562,8 @@ export default function GuestPage() {
                       <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
                     </p>
                     <button
-                      className="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 opacity-75"
-                      style={{ fontSize: '0.7rem' }}
+                      className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
+                      style={{ fontSize: '0.75rem' }}
                       onClick={() => setQr1isOpen((o) => !o)}
                     >
                       <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
@@ -586,8 +586,8 @@ export default function GuestPage() {
                       <i className="fa-regular fa-user fa-sm me-1"></i>Phạm Nguyễn Ý Duyên
                     </p>
                     <button
-                      className="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 opacity-75"
-                      style={{ fontSize: '0.7rem' }}
+                      className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
+                      style={{ fontSize: '0.75rem' }}
                       onClick={() => setQr2isOpen((o) => !o)}
                     >
                       <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
@@ -615,8 +615,8 @@ export default function GuestPage() {
                       <i className="fa-regular fa-user fa-sm me-1"></i>Đinh Duy Khanh
                     </p>
                     <button
-                      className="btn btn-outline-secondary btn-sm rounded-pill px-3 py-0 opacity-75"
-                      style={{ fontSize: '0.7rem' }}
+                      className="btn btn-outline-auto btn-sm shadow-sm rounded-4 py-0"
+                      style={{ fontSize: '0.75rem' }}
                       onClick={() => setGiftOpen((o) => !o)}
                     >
                       <i className="fa-solid fa-circle-info fa-sm me-1"></i>Info
