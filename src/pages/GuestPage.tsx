@@ -308,7 +308,7 @@ export default function GuestPage() {
                     >
                       <img src={asset('/assets/images/wedding-web/QHA_3212.webp')} alt="cowo" />
                     </div>
-                    <h2 className="font-greatvibes m-0" style={{ fontSize: '2.125rem' }}>
+                    <h2 className="font-brittany m-0" style={{ fontSize: '2.125rem' }}>
                       Đinh Duy Khanh
                     </h2>
                     <p className="mt-3 mb-1" style={{ fontSize: '1.25rem' }}>
@@ -340,7 +340,7 @@ export default function GuestPage() {
                     >
                       <img src={asset('/assets/images/Bride-center.webp')} alt="cewe" />
                     </div>
-                    <h2 className="font-greatvibes m-0" style={{ fontSize: '2.125rem' }}>
+                    <h2 className="font-brittany m-0" style={{ fontSize: '2.125rem' }}>
                       Phạm Nguyễn Ý Duyên
                     </h2>
                     <p className="mt-3 mb-1" style={{ fontSize: '1.25rem' }}>
@@ -460,7 +460,7 @@ export default function GuestPage() {
                 </p>
                 <div className="overflow-x-hidden">
                   <div className="py-2" data-aos="fade-right" data-aos-duration="1500">
-                    <h2 className="font-esthetic m-0 py-2" style={{ fontSize: '3rem' }}>
+                    <h2 className="font-brittany m-0 py-2" style={{ fontSize: '3rem' }}>
                       Capella: Park View
                     </h2>
                   </div>
