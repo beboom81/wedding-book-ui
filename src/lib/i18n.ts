@@ -5,6 +5,7 @@ export interface Translations {
   theWeddingOf: string;
   dearGuest: string;
   openInvitation: string;
+  cordiallyInvites: string;
 
   // Home
   weddingInvitation: string;
@@ -108,6 +109,7 @@ export const translations: Record<Lang, Translations> = {
     theWeddingOf: 'The Wedding Of',
     dearGuest: 'Dear',
     openInvitation: 'Open Invitation',
+    cordiallyInvites: 'Cordially Invites',
 
     // Home
     weddingInvitation: 'Wedding Invitation',
@@ -217,6 +219,7 @@ export const translations: Record<Lang, Translations> = {
     theWeddingOf: 'Lễ Cưới Của',
     dearGuest: 'Kính gửi',
     openInvitation: 'Mở Thiệp',
+    cordiallyInvites: 'Trân Trọng Kính Mời',
 
     // Home
     weddingInvitation: 'Thiệp Mời Cưới',

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <script>
+    // Redirect path-based invite URLs to the SPA with ?to= query param.
+    // e.g. /wedding-book-ui/Nguyễn Nhật Long → /wedding-book-ui/?to=Nguyễn Nhật Long
+    var base = '/wedding-book-ui/';
+    var path = decodeURIComponent(window.location.pathname);
+    if (path.startsWith(base) && path.length > base.length) {
+      var name = path.slice(base.length);
+      window.location.replace(base + '?to=' + encodeURIComponent(name));
+    } else {
+      window.location.replace(base);
+    }
+  </script>
+</head>
+</html>

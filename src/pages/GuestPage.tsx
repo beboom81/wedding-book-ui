@@ -108,17 +108,18 @@ export default function GuestPage() {
 
   useEffect(() => {
     if (!opened) return;
-    const ids = ['home', 'bride', 'wedding-date', 'gallery', 'comment'];
+    const ids = ['home', 'bride', 'wedding-date', 'comment', 'gallery'];
+    const visible = new Set<string>();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-            break;
-          }
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
         }
+        const active = ids.find(id => visible.has(id));
+        if (active) setActiveSection(active);
       },
-      { threshold: 0.35 },
+      { threshold: 0, rootMargin: '-20% 0px -50% 0px' },
     );
     ids.forEach(id => {
       const el = document.getElementById(id);
@@ -243,6 +244,16 @@ export default function GuestPage() {
               <p className="m-0" style={{ fontSize: '1rem' }}>
                 {PLACE_DATE}
               </p>
+              {guestName && (
+                <div className="mt-3 pt-3 border-top">
+                  <p className="m-0" style={{ fontSize: '0.85rem' }}>
+                    {t.cordiallyInvites}
+                  </p>
+                  <p className="font-waterfall m-0" style={{ fontSize: '2.25rem' }}>
+                    {guestName}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -359,78 +370,78 @@ export default function GuestPage() {
                   <Love top="90%" left="5%" />
                 </div>
               </div>
-            </section>
 
-            <Wave d="M0,192L40,181.3C80,171,160,149,240,149.3C320,149,400,171,480,165.3C560,160,640,128,720,128C800,128,880,160,960,186.7C1040,213,1120,235,1200,218.7C1280,203,1360,149,1400,122.7L1440,96L1440,0L0,0Z" />
+              <Wave d="M0,192L40,181.3C80,171,160,149,240,149.3C320,149,400,171,480,165.3C560,160,640,128,720,128C800,128,880,160,960,186.7C1040,213,1120,235,1200,218.7C1280,203,1360,149,1400,122.7L1440,96L1440,0L0,0Z" />
 
-            {/* Love Idiom */}
-            <section className="bg-light-dark pt-2 pb-4">
-              <div className="container text-center">
-                <h2 className="font-esthetic pt-2 pb-1 m-0" style={{ fontSize: '2rem' }}>
-                  {t.loveIdiomTitle}
-                </h2>
-                <div className="bg-theme-auto mt-4 p-3 shadow rounded-4" data-aos="fade-down" data-aos-duration="2000">
-                  <p className="p-1 mb-2" style={{ fontSize: '0.95rem' }}>
-                    {t.idiom1}
-                  </p>
-                </div>
-                <div className="bg-theme-auto mt-4 p-3 shadow rounded-4" data-aos="fade-down" data-aos-duration="2000">
-                  <p className="p-1 mb-2" style={{ fontSize: '0.95rem' }}>
-                    {t.idiom2}
-                  </p>
+              {/* Love Idiom */}
+              <div className="bg-light-dark pt-2 pb-4">
+                <div className="container text-center">
+                  <h2 className="font-esthetic pt-2 pb-1 m-0" style={{ fontSize: '2rem' }}>
+                    {t.loveIdiomTitle}
+                  </h2>
+                  <div className="bg-theme-auto mt-4 p-3 shadow rounded-4" data-aos="fade-down" data-aos-duration="2000">
+                    <p className="p-1 mb-2" style={{ fontSize: '0.95rem' }}>
+                      {t.idiom1}
+                    </p>
+                  </div>
+                  <div className="bg-theme-auto mt-4 p-3 shadow rounded-4" data-aos="fade-down" data-aos-duration="2000">
+                    <p className="p-1 mb-2" style={{ fontSize: '0.95rem' }}>
+                      {t.idiom2}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </section>
 
-            {/* Love Story */}
-            <section className="bg-light-dark pt-2 pb-4">
-              <div className="container">
-                <div className="bg-theme-auto rounded-5 shadow p-3">
-                  <h2 className="font-esthetic text-center py-2 mb-2" style={{ fontSize: '2.125rem' }}>
-                    {t.loveStoryTitle}
-                  </h2>
-                  <div className="position-relative">
-                    {!showStory && (
-                      <div
-                        className="position-absolute d-flex justify-content-center align-items-center top-50 start-50 translate-middle w-100 h-100 bg-overlay-auto z-3"
-                        style={{ backgroundColor: 'unset' }}
-                      >
-                        <button
-                          className="btn btn-outline-auto btn-sm rounded-4 shadow-sm"
-                          onClick={() => setShowStory(true)}
+              {/* Love Story */}
+              <div className="bg-light-dark pt-2 pb-4">
+                <div className="container">
+                  <div className="bg-theme-auto rounded-5 shadow p-3">
+                    <h2 className="font-esthetic text-center py-2 mb-2" style={{ fontSize: '2.125rem' }}>
+                      {t.loveStoryTitle}
+                    </h2>
+                    <div className="position-relative">
+                      {!showStory && (
+                        <div
+                          className="position-absolute d-flex justify-content-center align-items-center top-50 start-50 translate-middle w-100 h-100 bg-overlay-auto z-3"
+                          style={{ backgroundColor: 'unset' }}
                         >
-                          <i className="fa-solid fa-heart fa-bounce me-2"></i>{t.readOurStory}
-                        </button>
-                      </div>
-                    )}
-                    <div
-                      className="overflow-y-scroll overflow-x-hidden p-2 with-scrollbar"
-                      style={{ height: '15rem', filter: showStory ? 'none' : 'blur(5px)' }}
-                    >
-                      {t.loveStory.map(([title, body], i) => (
-                        <div className="row" key={i}>
-                          <div className="col-auto position-relative">
-                            <p
-                              className="position-relative d-flex justify-content-center align-items-center bg-theme-auto border border-secondary border-2 opacity-100 rounded-circle m-0 p-0 z-1"
-                              style={{ width: '2rem', height: '2rem' }}
-                            >
-                              {i + 1}
-                            </p>
-                            <hr className="position-absolute top-0 start-50 translate-middle-x border border-secondary h-100 z-0 opacity-100 m-0 rounded-4 shadow-none" />
-                          </div>
-                          <div className="col mt-1 mb-3 ps-0">
-                            <p className="fw-bold mb-2">{title}</p>
-                            <p className="small mb-0">{body}</p>
-                          </div>
+                          <button
+                            className="btn btn-outline-auto btn-sm rounded-4 shadow-sm"
+                            onClick={() => setShowStory(true)}
+                          >
+                            <i className="fa-solid fa-heart fa-bounce me-2"></i>{t.readOurStory}
+                          </button>
                         </div>
-                      ))}
+                      )}
+                      <div
+                        className="overflow-y-scroll overflow-x-hidden p-2 with-scrollbar"
+                        style={{ height: '15rem', filter: showStory ? 'none' : 'blur(5px)' }}
+                      >
+                        {t.loveStory.map(([title, body], i) => (
+                          <div className="row" key={i}>
+                            <div className="col-auto position-relative">
+                              <p
+                                className="position-relative d-flex justify-content-center align-items-center bg-theme-auto border border-secondary border-2 opacity-100 rounded-circle m-0 p-0 z-1"
+                                style={{ width: '2rem', height: '2rem' }}
+                              >
+                                {i + 1}
+                              </p>
+                              <hr className="position-absolute top-0 start-50 translate-middle-x border border-secondary h-100 z-0 opacity-100 m-0 rounded-4 shadow-none" />
+                            </div>
+                            <div className="col mt-1 mb-3 ps-0">
+                              <p className="fw-bold mb-2">{title}</p>
+                              <p className="small mb-0">{body}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </section>
 
-            <Wave d="M0,96L30,106.7C60,117,120,139,180,154.7C240,171,300,181,360,186.7C420,192,480,192,540,181.3C600,171,660,149,720,154.7C780,160,840,192,900,208C960,224,1020,224,1080,208C1140,192,1200,160,1260,138.7C1320,117,1380,107,1410,101.3L1440,96L1440,320L0,320Z" />
+              <Wave d="M0,96L30,106.7C60,117,120,139,180,154.7C240,171,300,181,360,186.7C420,192,480,192,540,181.3C600,171,660,149,720,154.7C780,160,840,192,900,208C960,224,1020,224,1080,208C1140,192,1200,160,1260,138.7C1320,117,1380,107,1410,101.3L1440,96L1440,320L0,320Z" />
+            </section>
 
             {/* Wedding Date */}
             <section className="bg-white-black pb-2" id="wedding-date">
@@ -503,6 +514,22 @@ export default function GuestPage() {
                   <small className="d-block my-1">
                     {t.venueAddress}
                   </small>
+                </div>
+              </div>
+            </section>
+
+            {/* Comment */}
+            <section className="bg-light-dark my-0 pb-0 pt-3" id="comment">
+              <div className="container">
+                <div className="border rounded-5 shadow p-3 mb-2">
+                  <h2 className="font-esthetic text-center mt-2 mb-4" style={{ fontSize: '2.25rem' }}>
+                    {t.wishTitle}
+                  </h2>
+                  {commentsEnabled ? (
+                    <CommentSection token={accessKey} isAdmin={false} config={guestConfig} variant="guest" />
+                  ) : (
+                    <p className="text-center m-0">{t.commentDisabled}</p>
+                  )}
                 </div>
               </div>
             </section>
@@ -665,22 +692,6 @@ export default function GuestPage() {
               </div>
             </section>
 
-            {/* Comment */}
-            <section className="bg-light-dark my-0 pb-0 pt-3" id="comment">
-              <div className="container">
-                <div className="border rounded-5 shadow p-3 mb-2">
-                  <h2 className="font-esthetic text-center mt-2 mb-4" style={{ fontSize: '2.25rem' }}>
-                    {t.wishTitle}
-                  </h2>
-                  {commentsEnabled ? (
-                    <CommentSection token={accessKey} isAdmin={false} config={guestConfig} variant="guest" />
-                  ) : (
-                    <p className="text-center m-0">{t.commentDisabled}</p>
-                  )}
-                </div>
-              </div>
-            </section>
-
             <Wave d="M0,224L34.3,234.7C68.6,245,137,267,206,266.7C274.3,267,343,245,411,234.7C480,224,549,224,617,213.3C685.7,203,754,181,823,197.3C891.4,213,960,267,1029,266.7C1097.1,267,1166,213,1234,192C1302.9,171,1371,181,1406,186.7L1440,192L1440,320L0,320Z" />
 
             {/* End */}
@@ -689,7 +700,7 @@ export default function GuestPage() {
                 <p className="pb-2 pt-4" style={{ fontSize: '1rem' }}>
                   {t.thankYouDesc}
                 </p>
-                <h2 className="font-greatvibes" style={{ fontSize: '2rem' }}>
+                <h2 className="font-dancingscript" style={{ fontSize: '2rem' }}>
                   {t.thankYouPresence}
                 </h2>
                 <h2 className="font-dancingscript pt-4" style={{ fontSize: '2rem' }}>
@@ -710,8 +721,8 @@ export default function GuestPage() {
                 ['home', 'fa-house', t.navHome],
                 ['bride', 'fa-user-group', t.navMarriage],
                 ['wedding-date', 'fa-calendar-check', t.navDate],
-                ['gallery', 'fa-images', t.navGallery],
                 ['comment', 'fa-comments', t.navWish],
+                ['gallery', 'fa-images', t.navGallery],
               ] as [string, string, string][]).map(([id, icon, label]) => (
                 <li className="nav-item" key={id}>
                   <button
@@ -755,7 +766,7 @@ export default function GuestPage() {
               {guestName && (
                 <div className="m-2">
                   <small className="mt-0 mb-1 mx-0 p-0">{t.dearGuest}</small>
-                  <p className="m-0 p-0" style={{ fontSize: '1.25rem' }}>
+                  <p className="font-waterfall m-0 p-0" style={{ fontSize: '2rem' }}>
                     {guestName}
                   </p>
                 </div>

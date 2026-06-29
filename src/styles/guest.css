@@ -188,6 +188,11 @@ svg {
   font-family: 'Great Vibes', cursive;
 }
 
+/* Always Waterfall regardless of language — used for guest names */
+.font-waterfall {
+  font-family: 'Waterfall', cursive;
+}
+
 /* ── Vietnamese font overrides ─────────────────────────────────────────────
    EN fonts (Sacramento, Great Vibes, Dancing Script) lack Vietnamese glyphs.
    These overrides swap them out only when lang="vi" is active.

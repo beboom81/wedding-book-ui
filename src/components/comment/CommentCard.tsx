@@ -5,7 +5,7 @@ import type { CommentItem } from '../../lib/types';
 import { ask, convertMarkdownToHTML, escapeHtml, parseUserAgent } from '../../lib/util';
 import { useLang } from '../../context/LangContext';
 import { storage } from '../../lib/storage';
-import { notify } from '../../lib/notify';
+import { notify } from '../../lib/util';
 
 const info = storage('weddingbook_information');
 
