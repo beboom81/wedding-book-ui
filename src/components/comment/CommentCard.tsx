@@ -4,6 +4,10 @@ import GifPicker, { type SelectedGif } from './GifPicker';
 import type { CommentItem } from '../../lib/types';
 import { ask, convertMarkdownToHTML, escapeHtml, parseUserAgent } from '../../lib/util';
 import { useLang } from '../../context/LangContext';
+import { storage } from '../../lib/storage';
+import { notify } from '../../lib/notify';
+
+const info = storage('weddingbook_information');
 
 const MAX_LEN = 300;
 
@@ -141,7 +145,14 @@ export default function CommentCard({ c }: { c: CommentItem }) {
           {canReply && (
             <button
               style={{ fontSize: '0.8rem' }}
-              onClick={() => setReplyOpen((o) => !o)}
+              onClick={() => {
+                const savedName = info.get<string>('name') ?? '';
+                if (!savedName.trim()) {
+                  notify(t.nameEmpty).warning();
+                  return;
+                }
+                setReplyOpen((o) => !o);
+              }}
               className="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm"
             >
               {t.reply}
@@ -196,7 +207,7 @@ export default function CommentCard({ c }: { c: CommentItem }) {
           onSubmit={async (text, gif) => {
             const res = await create({
               id: c.uuid,
-              name: 'Reply',
+              name: info.get<string>('name') ?? 'Guest',
               presence: true,
               comment: gif ? null : text,
               gif_id: gif?.id ?? null,
