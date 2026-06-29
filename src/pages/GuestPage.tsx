@@ -262,40 +262,50 @@ export default function GuestPage() {
         <div className="col-sm-7 col-md-6 col-lg-5 col-xl-4 col-xxl-3 m-0 p-0">
           <main tabIndex={0}>
             {/* Home */}
-            <section id="home" className="bg-light-dark position-relative overflow-hidden p-0 m-0">
+            <section id="home" className="position-relative overflow-hidden p-0 m-0 d-flex flex-column" style={{ minHeight: '100svh' }}>
               <img
                 src={asset('/assets/images/wedding-web/171A7900.webp')}
-                alt="bg"
-                className="position-absolute opacity-25 top-50 start-50 translate-middle bg-cover-home"
+                alt="couple"
+                className="position-absolute top-0 start-0 w-100 h-100 cursor-pointer"
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
+                onClick={() => setModalSrc(asset('/assets/images/wedding-web/171A7900.webp'))}
               />
-              <div className="position-relative text-center bg-overlay-auto" style={{ backgroundColor: 'unset' }}>
-                <h1 className="font-esthetic pt-5 pb-4 fw-medium" style={{ fontSize: '2.25rem' }}>
+              <div
+                className="position-absolute top-0 start-0 w-100 h-100"
+                style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.72) 100%)' }}
+              />
+              <div className="position-relative text-white d-flex flex-column justify-content-between flex-grow-1 text-center">
+                <h1 className="font-esthetic pt-5 fw-medium" style={{ fontSize: '2.25rem' }}>
                   {t.weddingInvitation}
                 </h1>
-                <div
-                  className="portrait-circle cursor-pointer"
-                  onClick={() => setModalSrc(asset('/assets/images/wedding-web/171A7900.webp'))}
-                >
-                  <img src={asset('/assets/images/wedding-web/171A7900.webp')} alt="couple" />
-                </div>
-                <h2 className="font-esthetic my-4" style={{ fontSize: '2.25rem' }}>
-                  {COUPLE}
-                </h2>
-                <p className="my-2" style={{ fontSize: '1.25rem' }}>
-                  {PLACE_DATE}
-                </p>
-                <div className="d-flex justify-content-center align-items-center mt-4 mb-2">
-                  <div className="mouse-animation border border-secondary border-2 rounded-5 px-2 py-1 opacity-50">
-                    <div className="scroll-animation rounded-4 bg-secondary"></div>
+                <div className="pb-3">
+                  <h2 className="font-brittany text-white m-0 px-2" style={{ fontSize: '2.6rem', lineHeight: 1.15 }}>
+                    Đinh Duy Khanh
+                  </h2>
+                  <p className="text-white my-1" style={{ fontSize: '1.4rem' }}>&amp;</p>
+                  <h2 className="font-brittany text-white m-0 px-2" style={{ fontSize: '2.6rem', lineHeight: 1.15 }}>
+                    Phạm Nguyễn Ý Duyên
+                  </h2>
+                  <p className="text-white mt-3 mb-2 opacity-75" style={{ fontSize: '1rem' }}>
+                    {PLACE_DATE}
+                  </p>
+                  <div className="d-flex justify-content-center align-items-center mt-4 mb-2">
+                    <div className="mouse-animation border border-white border-2 rounded-5 px-2 py-1 opacity-50">
+                      <div className="scroll-animation rounded-4 bg-white"></div>
+                    </div>
                   </div>
+                  <p className="pb-4 m-0 opacity-50" style={{ fontSize: '0.825rem' }}>
+                    {t.scrollDown}
+                  </p>
                 </div>
-                <p className="pb-4 m-0 text-secondary" style={{ fontSize: '0.825rem' }}>
-                  {t.scrollDown}
-                </p>
+              </div>
+              {/* Wave anchored inside home for smooth blend into next section */}
+              <div className="position-absolute bottom-0 start-0 w-100 svg-wrapper" style={{ lineHeight: 0 }}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="color-theme-svg" style={{ display: 'block', background: 'transparent', marginBottom: '-2px' }}>
+                  <path fill="currentColor" fillOpacity="1" d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,96C960,96,1056,160,1152,154.7C1248,149,1344,75,1392,37.3L1440,0L1440,320L0,320Z" />
+                </svg>
               </div>
             </section>
-
-            <Wave d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,96C960,96,1056,160,1152,154.7C1248,149,1344,75,1392,37.3L1440,0L1440,320L0,320Z" />
 
             {/* Bride */}
             <section className="bg-white-black text-center" id="bride">
@@ -572,7 +582,7 @@ export default function GuestPage() {
                   {t.loveGiftDesc}
                 </p>
 
-                <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start" data-aos="fade-up" data-aos-duration="2500">
+                <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start">
                   <i className="fa-solid fa-money-bill-transfer"></i>
                   <p className="d-inline"> {t.bankTransfer}</p>
                   <div className="d-flex justify-content-between align-items-center mt-2">
@@ -603,7 +613,7 @@ export default function GuestPage() {
                   </Collapse>
                 </div>
 
-                <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start" data-aos="fade-up" data-aos-duration="2500">
+                <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start">
                   <i className="fa-solid fa-qrcode fa-lg"></i>
                   <p className="d-inline"> QR</p>
                   <div className="d-flex justify-content-between align-items-center mt-2">
@@ -656,7 +666,7 @@ export default function GuestPage() {
                   </Collapse>
                 </div>
 
-                <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start" data-aos="fade-up" data-aos-duration="2500">
+                <div className="bg-theme-auto rounded-4 shadow p-3 mx-4 mt-4 text-start">
                   <i className="fa-solid fa-gift fa-lg"></i>
                   <p className="d-inline"> {t.giftLabel}</p>
                   <div className="d-flex justify-content-between align-items-center mt-2">
@@ -710,6 +720,7 @@ export default function GuestPage() {
                 <small>
                   {t.buildWith}<i className="fa-solid fa-heart mx-1"></i>Duy Khanh
                 </small>
+                <div style={{ height: '4rem' }} />
               </div>
             </section>
           </main>

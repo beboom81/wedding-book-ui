@@ -290,7 +290,7 @@ export const translations: Record<Lang, Translations> = {
     navMarriage: 'Đôi Bạn',
     navDate: 'Ngày Cưới',
     navGallery: 'Ảnh',
-    navWish: 'Chúc',
+    navWish: 'Lời Chúc',
 
     // Comment form
     nameLabel: 'Tên',
