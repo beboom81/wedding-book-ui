@@ -339,6 +339,7 @@ export default function GuestPage() {
                       alt="cewe"
                       onClick={(e) => setModalSrc(e.currentTarget.src)}
                       className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
+                      style={{ objectPosition: 'center 20%' }}
                     />
                     <h2 className="font-greatvibes m-0" style={{ fontSize: '2.125rem' }}>
                       Phạm Nguyễn Ý Duyên
