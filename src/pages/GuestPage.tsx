@@ -261,12 +261,12 @@ export default function GuestPage() {
                 <h1 className="font-esthetic pt-5 pb-4 fw-medium" style={{ fontSize: '2.25rem' }}>
                   {t.weddingInvitation}
                 </h1>
-                <img
-                  src={asset('/assets/images/wedding-web/171A7900.webp')}
-                  alt="couple"
-                  onClick={(e) => setModalSrc(e.currentTarget.src)}
-                  className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
-                />
+                <div
+                  className="portrait-circle cursor-pointer"
+                  onClick={() => setModalSrc(asset('/assets/images/wedding-web/171A7900.webp'))}
+                >
+                  <img src={asset('/assets/images/wedding-web/171A7900.webp')} alt="couple" />
+                </div>
                 <h2 className="font-esthetic my-4" style={{ fontSize: '2.25rem' }}>
                   {COUPLE}
                 </h2>
@@ -302,12 +302,12 @@ export default function GuestPage() {
                 <div className="position-relative">
                   <Love top="0%" right="5%" />
                   <div data-aos="fade-right" data-aos-duration="2000" className="pb-1">
-                    <img
-                      src={asset('/assets/images/wedding-web/QHA_3212.webp')}
-                      alt="cowo"
-                      onClick={(e) => setModalSrc(e.currentTarget.src)}
-                      className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
-                    />
+                    <div
+                      className="portrait-circle cursor-pointer"
+                      onClick={() => setModalSrc(asset('/assets/images/wedding-web/QHA_3212.webp'))}
+                    >
+                      <img src={asset('/assets/images/wedding-web/QHA_3212.webp')} alt="cowo" />
+                    </div>
                     <h2 className="font-greatvibes m-0" style={{ fontSize: '2.125rem' }}>
                       Đinh Duy Khanh
                     </h2>
@@ -334,12 +334,12 @@ export default function GuestPage() {
                 <div className="position-relative">
                   <Love top="0%" right="5%" />
                   <div data-aos="fade-left" data-aos-duration="2000" className="pb-1">
-                    <img
-                      src={asset('/assets/images/Bride-center.webp')}
-                      alt="cewe"
-                      onClick={(e) => setModalSrc(e.currentTarget.src)}
-                      className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
-                    />
+                    <div
+                      className="portrait-circle cursor-pointer"
+                      onClick={() => setModalSrc(asset('/assets/images/Bride-center.webp'))}
+                    >
+                      <img src={asset('/assets/images/Bride-center.webp')} alt="cewe" />
+                    </div>
                     <h2 className="font-greatvibes m-0" style={{ fontSize: '2.125rem' }}>
                       Phạm Nguyễn Ý Duyên
                     </h2>
@@ -746,11 +746,9 @@ export default function GuestPage() {
               <h2 className="font-esthetic mb-4" style={{ fontSize: '2.25rem' }}>
                 {t.theWeddingOf}
               </h2>
-              <img
-                src={asset('/assets/images/wedding-web/171A7900.webp')}
-                alt="background"
-                className="img-center-crop rounded-circle border border-3 border-light shadow mb-4 mx-auto"
-              />
+              <div className="portrait-circle mb-4">
+                <img src={asset('/assets/images/wedding-web/171A7900.webp')} alt="background" />
+              </div>
               <h2 className="font-esthetic mb-4" style={{ fontSize: '2.25rem' }}>
                 {COUPLE}
               </h2>
