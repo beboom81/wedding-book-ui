@@ -18,35 +18,35 @@ const LOVE_PATH =
 const COUPLE = 'Duy Khanh & Ý Duyên';
 const PLACE_DATE = 'Hồ Chí Minh, 01 August 2026';
 
-const IMG = (f: string) => `/assets/images/wedding/${f}`;
+const IMG = (f: string) => `/assets/images/wedding-web/${f}`;
 
 // Desktop left-panel Ken Burns slideshow
 const SLIDES = [
-  IMG('171A8003.jpg'),
-  IMG('171A7929.jpg'),
-  IMG('QHA_3725.jpg'),
-  IMG('QHA_3396.jpg'),
-  IMG('QHA_3137.jpg'),
-  IMG('QHA_3377.jpg'),
-  IMG('QHA_2751.jpg'),
-  IMG('QHA_3638.jpg'),
+  IMG('171A8003.webp'),
+  IMG('171A7929.webp'),
+  IMG('QHA_3725.webp'),
+  IMG('QHA_3396.webp'),
+  IMG('QHA_3137.webp'),
+  IMG('QHA_3377.webp'),
+  IMG('QHA_2751.webp'),
+  IMG('QHA_3638.webp'),
 ];
 
 // Gallery — all wedding photos, split across 3 carousels
 const ALL_GALLERY = [
-  IMG('171A7894.jpg'), IMG('171A7900.jpg'), IMG('171A7914.jpg'),
-  IMG('171A7929.jpg'), IMG('171A7977.jpg'), IMG('171A8003.jpg'),
-  IMG('2.jpg'),        IMG('3.jpg'),        IMG('47.jpg'),
-  IMG('62.jpg'),       IMG('96.jpg'),       IMG('97.jpg'),
-  IMG('QHA_2699.jpg'), IMG('QHA_2751.jpg'), IMG('QHA_2773.jpg'),
-  IMG('QHA_2957.jpg'), IMG('QHA_3025.jpg'), IMG('QHA_3066.jpg'),
-  IMG('QHA_3137.jpg'), IMG('QHA_3175.jpg'), IMG('QHA_3212.jpg'),
-  IMG('QHA_3296.jpg'), IMG('QHA_3330.jpg'), IMG('QHA_3357.jpg'),
-  IMG('QHA_3377.jpg'), IMG('QHA_3396.jpg'), IMG('QHA_3405.jpg'),
-  IMG('QHA_3495.jpg'), IMG('QHA_3574.jpg'), IMG('QHA_3603.jpg'),
-  IMG('QHA_3638.jpg'), IMG('QHA_3651.jpg'), IMG('QHA_3674.jpg'),
-  IMG('QHA_3725.jpg'), IMG('QHA_3737.jpg'), IMG('QHA_3761.jpg'),
-  IMG('QHA_3776.jpg'), IMG('QHA_3789.jpg'), IMG('QHA_3812.jpg'),
+  IMG('171A7894.webp'), IMG('171A7900.webp'), IMG('171A7914.webp'),
+  IMG('171A7929.webp'), IMG('171A7977.webp'), IMG('171A8003.webp'),
+  IMG('2.webp'),        IMG('3.webp'),        IMG('47.webp'),
+  IMG('62.webp'),       IMG('96.webp'),       IMG('97.webp'),
+  IMG('QHA_2699.webp'), IMG('QHA_2751.webp'), IMG('QHA_2773.webp'),
+  IMG('QHA_2957.webp'), IMG('QHA_3025.webp'), IMG('QHA_3066.webp'),
+  IMG('QHA_3137.webp'), IMG('QHA_3175.webp'), IMG('QHA_3212.webp'),
+  IMG('QHA_3296.webp'), IMG('QHA_3330.webp'), IMG('QHA_3357.webp'),
+  IMG('QHA_3377.webp'), IMG('QHA_3396.webp'), IMG('QHA_3405.webp'),
+  IMG('QHA_3495.webp'), IMG('QHA_3574.webp'), IMG('QHA_3603.webp'),
+  IMG('QHA_3638.webp'), IMG('QHA_3651.webp'), IMG('QHA_3674.webp'),
+  IMG('QHA_3725.webp'), IMG('QHA_3737.webp'), IMG('QHA_3761.webp'),
+  IMG('QHA_3776.webp'), IMG('QHA_3789.webp'), IMG('QHA_3812.webp'),
 ];
 const CHUNK = Math.ceil(ALL_GALLERY.length / 3);
 const gallery1 = ALL_GALLERY.slice(0, CHUNK);
@@ -253,7 +253,7 @@ export default function GuestPage() {
             {/* Home */}
             <section id="home" className="bg-light-dark position-relative overflow-hidden p-0 m-0">
               <img
-                src={asset('/assets/images/wedding/171A7900.jpg')}
+                src={asset('/assets/images/wedding-web/171A7900.webp')}
                 alt="bg"
                 className="position-absolute opacity-25 top-50 start-50 translate-middle bg-cover-home"
               />
@@ -262,7 +262,7 @@ export default function GuestPage() {
                   {t.weddingInvitation}
                 </h1>
                 <img
-                  src={asset('/assets/images/wedding/171A7900.jpg')}
+                  src={asset('/assets/images/wedding-web/171A7900.webp')}
                   alt="couple"
                   onClick={(e) => setModalSrc(e.currentTarget.src)}
                   className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
@@ -303,7 +303,7 @@ export default function GuestPage() {
                   <Love top="0%" right="5%" />
                   <div data-aos="fade-right" data-aos-duration="2000" className="pb-1">
                     <img
-                      src={asset('/assets/images/wedding/QHA_3212.jpg')}
+                      src={asset('/assets/images/wedding-web/QHA_3212.webp')}
                       alt="cowo"
                       onClick={(e) => setModalSrc(e.currentTarget.src)}
                       className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
@@ -335,7 +335,7 @@ export default function GuestPage() {
                   <Love top="0%" right="5%" />
                   <div data-aos="fade-left" data-aos-duration="2000" className="pb-1">
                     <img
-                      src={asset('/assets/images/Bride-center.jpg')}
+                      src={asset('/assets/images/Bride-center.webp')}
                       alt="cewe"
                       onClick={(e) => setModalSrc(e.currentTarget.src)}
                       className="img-center-crop rounded-circle border border-3 border-light shadow my-4 mx-auto cursor-pointer"
@@ -747,7 +747,7 @@ export default function GuestPage() {
                 {t.theWeddingOf}
               </h2>
               <img
-                src={asset('/assets/images/wedding/171A7900.jpg')}
+                src={asset('/assets/images/wedding-web/171A7900.webp')}
                 alt="background"
                 className="img-center-crop rounded-circle border border-3 border-light shadow mb-4 mx-auto"
               />
