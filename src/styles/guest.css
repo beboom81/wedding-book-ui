@@ -18,7 +18,7 @@ html {
 }
 
 .font-esthetic {
-    font-family: 'Sacramento', cursive !important;
+    font-family: 'BrittanySignature', cursive !important;
 }
 
 .font-arabic {
@@ -168,7 +168,7 @@ svg {
 }
 
 .font-greatvibes {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'BrittanySignature', cursive;
 }
 
 .font-sacramento {
@@ -176,16 +176,15 @@ svg {
 }
 
 .font-dancingscript {
-  font-family: 'Dancing Script', cursive;
+  font-family: 'Waterfall', cursive;
 }
 
 .font-pacifico {
   font-family: 'Pacifico', cursive;
 }
 
-/* font-brittany: Great Vibes in EN, BrittanySignature in VI (see below) */
 .font-brittany {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'BrittanySignature', cursive;
 }
 
 /* Always Waterfall regardless of language — used for guest names */
@@ -193,16 +192,3 @@ svg {
   font-family: 'Waterfall', cursive;
 }
 
-/* ── Vietnamese font overrides ─────────────────────────────────────────────
-   EN fonts (Sacramento, Great Vibes, Dancing Script) lack Vietnamese glyphs.
-   These overrides swap them out only when lang="vi" is active.
-   ────────────────────────────────────────────────────────────────────────── */
-html[lang="vi"] .font-esthetic,
-html[lang="vi"] .font-greatvibes,
-html[lang="vi"] .font-brittany {
-  font-family: 'BrittanySignature', cursive !important;
-}
-
-html[lang="vi"] .font-dancingscript {
-  font-family: 'Waterfall', cursive !important;
-}

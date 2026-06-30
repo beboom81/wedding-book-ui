@@ -16,7 +16,6 @@ const LOVE_PATH =
   'm8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15';
 
 const COUPLE = 'Duy Khanh & Ý Duyên';
-const PLACE_DATE = 'Hồ Chí Minh, 01 August 2026';
 
 const IMG = (f: string) => `/assets/images/wedding-web/${f}`;
 
@@ -242,7 +241,7 @@ export default function GuestPage() {
                 {COUPLE}
               </h2>
               <p className="m-0" style={{ fontSize: '1rem' }}>
-                {PLACE_DATE}
+                {t.placeDate}
               </p>
               {guestName && (
                 <div className="mt-3 pt-3 border-top">
@@ -287,7 +286,7 @@ export default function GuestPage() {
                     Phạm Nguyễn Ý Duyên
                   </h2>
                   <p className="text-white mt-3 mb-2 opacity-75" style={{ fontSize: '1rem' }}>
-                    {PLACE_DATE}
+                    {t.placeDate}
                   </p>
                   <div className="d-flex justify-content-center align-items-center mt-4 mb-2">
                     <div className="mouse-animation border border-white border-2 rounded-5 px-2 py-1 opacity-50">
@@ -359,7 +358,7 @@ export default function GuestPage() {
                       className="portrait-circle cursor-pointer"
                       onClick={() => setModalSrc(asset('/assets/images/Bride-center.webp'))}
                     >
-                      <img src={asset('/assets/images/Bride-center.webp')} alt="cewe" />
+                      <img src={asset('/assets/images/Bride-center.webp')} alt="cewe" style={{ objectPosition: 'center 15%' }} />
                     </div>
                     <h2 className="font-brittany m-0" style={{ fontSize: '2.125rem' }}>
                       Phạm Nguyễn Ý Duyên
@@ -769,7 +768,7 @@ export default function GuestPage() {
                 {t.theWeddingOf}
               </h2>
               <div className="portrait-circle mb-4">
-                <img src={asset('/assets/images/wedding-web/171A7900.webp')} alt="background" />
+                <img src={asset('/assets/images/wedding-web/171A7900.webp')} alt="background" style={{ objectPosition: 'center 25%' }} />
               </div>
               <h2 className="font-esthetic mb-4" style={{ fontSize: '2.25rem' }}>
                 {COUPLE}

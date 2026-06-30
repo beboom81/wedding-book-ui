@@ -10,6 +10,7 @@ export interface Translations {
   // Home
   weddingInvitation: string;
   scrollDown: string;
+  placeDate: string;
 
   // Bride / Marriage
   weddingCeremony: string;
@@ -114,6 +115,7 @@ export const translations: Record<Lang, Translations> = {
     // Home
     weddingInvitation: 'Wedding Invitation',
     scrollDown: 'Scroll Down',
+    placeDate: 'Ho Chi Minh, 01 August 2026',
 
     // Bride / Marriage
     weddingCeremony: 'Wedding Ceremony',
@@ -224,6 +226,7 @@ export const translations: Record<Lang, Translations> = {
     // Home
     weddingInvitation: 'Thiệp Mời Cưới',
     scrollDown: 'Cuộn Xuống',
+    placeDate: 'Hồ Chí Minh, 01 tháng 08 năm 2026',
 
     // Bride / Marriage
     weddingCeremony: 'Lễ Thành Hôn',
