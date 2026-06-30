@@ -31,26 +31,33 @@ const SLIDES = [
   IMG('QHA_3638.webp'),
 ];
 
-// Gallery — all wedding photos, split across 3 carousels
-const ALL_GALLERY = [
+// Gallery — landscape photos (object-fit: cover works well)
+const LANDSCAPE_GALLERY = [
+  IMG('2.webp'),        IMG('3.webp'),        IMG('96.webp'),
+  IMG('97.webp'),       IMG('QHA_2699.webp'), IMG('QHA_2751.webp'),
+  IMG('QHA_2957.webp'), IMG('QHA_3066.webp'), IMG('QHA_3137.webp'),
+  IMG('QHA_3296.webp'), IMG('QHA_3396.webp'), IMG('QHA_3761.webp'),
+];
+const LC = Math.ceil(LANDSCAPE_GALLERY.length / 2);
+const lGallery1 = LANDSCAPE_GALLERY.slice(0, LC);
+const lGallery2 = LANDSCAPE_GALLERY.slice(LC);
+
+// Gallery — portrait photos shown full (object-fit: contain, no cropping)
+const PORTRAIT_GALLERY = [
   IMG('171A7894.webp'), IMG('171A7900.webp'), IMG('171A7914.webp'),
   IMG('171A7929.webp'), IMG('171A7977.webp'), IMG('171A8003.webp'),
-  IMG('2.webp'),        IMG('3.webp'),        IMG('47.webp'),
-  IMG('62.webp'),       IMG('96.webp'),       IMG('97.webp'),
-  IMG('QHA_2699.webp'), IMG('QHA_2751.webp'), IMG('QHA_2773.webp'),
-  IMG('QHA_2957.webp'), IMG('QHA_3025.webp'), IMG('QHA_3066.webp'),
-  IMG('QHA_3137.webp'), IMG('QHA_3175.webp'), IMG('QHA_3212.webp'),
-  IMG('QHA_3296.webp'), IMG('QHA_3330.webp'), IMG('QHA_3357.webp'),
-  IMG('QHA_3377.webp'), IMG('QHA_3396.webp'), IMG('QHA_3405.webp'),
-  IMG('QHA_3495.webp'), IMG('QHA_3574.webp'), IMG('QHA_3603.webp'),
-  IMG('QHA_3638.webp'), IMG('QHA_3651.webp'), IMG('QHA_3674.webp'),
-  IMG('QHA_3725.webp'), IMG('QHA_3737.webp'), IMG('QHA_3761.webp'),
+  IMG('47.webp'),       IMG('62.webp'),       IMG('QHA_2773.webp'),
+  IMG('QHA_3025.webp'), IMG('QHA_3175.webp'), IMG('QHA_3212.webp'),
+  IMG('QHA_3330.webp'), IMG('QHA_3357.webp'), IMG('QHA_3377.webp'),
+  IMG('QHA_3405.webp'), IMG('QHA_3495.webp'), IMG('QHA_3574.webp'),
+  IMG('QHA_3603.webp'), IMG('QHA_3638.webp'), IMG('QHA_3651.webp'),
+  IMG('QHA_3674.webp'), IMG('QHA_3725.webp'), IMG('QHA_3737.webp'),
   IMG('QHA_3776.webp'), IMG('QHA_3789.webp'), IMG('QHA_3812.webp'),
+  IMG('z_photo1.webp'), IMG('z_photo2.webp'),
 ];
-const CHUNK = Math.ceil(ALL_GALLERY.length / 3);
-const gallery1 = ALL_GALLERY.slice(0, CHUNK);
-const gallery2 = ALL_GALLERY.slice(CHUNK, CHUNK * 2);
-const gallery3 = ALL_GALLERY.slice(CHUNK * 2);
+const PC = Math.ceil(PORTRAIT_GALLERY.length / 2);
+const pGallery1 = PORTRAIT_GALLERY.slice(0, PC);
+const pGallery2 = PORTRAIT_GALLERY.slice(PC);
 
 function getQueryParam(name: string): string | null {
   const href = window.location.href;
@@ -550,7 +557,7 @@ export default function GuestPage() {
                   <h2 className="font-esthetic text-center py-2 m-0" style={{ fontSize: '2.25rem' }}>
                     {t.galleryTitle}
                   </h2>
-                  {[gallery1, gallery2, gallery3].map((set, idx) => (
+                  {[lGallery1, lGallery2].map((set, idx) => (
                     <Carousel key={idx} className="mt-4" data-aos="fade-up" data-aos-duration="1500">
                       {set.map((src) => (
                         <Carousel.Item key={src}>
@@ -561,6 +568,29 @@ export default function GuestPage() {
                             style={{ objectFit: 'cover', maxHeight: '16rem', width: '100%' }}
                             onClick={(e) => setModalSrc((e.currentTarget as HTMLImageElement).src)}
                           />
+                        </Carousel.Item>
+                      ))}
+                    </Carousel>
+                  ))}
+
+                  <hr className="my-4 opacity-25" />
+
+                  {[pGallery1, pGallery2].map((set, idx) => (
+                    <Carousel key={'p' + idx} className="mt-4" data-aos="fade-up" data-aos-duration="1500">
+                      {set.map((src) => (
+                        <Carousel.Item key={src}>
+                          <div
+                            className="rounded-4 overflow-hidden d-flex align-items-center justify-content-center bg-black"
+                            style={{ maxHeight: '28rem', minHeight: '20rem' }}
+                          >
+                            <img
+                              src={asset(src)}
+                              alt="wedding photo"
+                              className="cursor-pointer"
+                              style={{ objectFit: 'contain', maxHeight: '28rem', maxWidth: '100%' }}
+                              onClick={(e) => setModalSrc((e.currentTarget as HTMLImageElement).src)}
+                            />
+                          </div>
                         </Carousel.Item>
                       ))}
                     </Carousel>
